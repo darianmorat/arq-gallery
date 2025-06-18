@@ -1,0 +1,32 @@
+@import "./reset.css";
+@import "./theme.css";
+@import "./variables.css";
+
+* {
+   font-family: var(--font-family);
+}
+
+body {
+   color: var(--color-text);
+   background-color: var(--color-background);
+   font-weight: var(--font-weight);
+   font-size: var(--font-size);
+}
+
+a {
+   color: var(--color-text-link);
+   text-decoration: none;
+
+   &:hover {
+      filter: brightness(1.1);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+   }
+}
+
+select,
+input {
+   border: 2px solid var(--color-border);
+   border-radius: var(--border-radius-small);
+   padding: 10px 15px;
+}
