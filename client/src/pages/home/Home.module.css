@@ -1,0 +1,112 @@
+.home {
+   width: 100%;
+   margin: 0 auto;
+   max-width: var(--max-width-screen);
+   padding: 20px;
+}
+
+.imageWrapper {
+   position: relative;
+   break-inside: avoid;
+   margin-bottom: 20px;
+}
+
+.placeholder {
+   width: 100%;
+   height: 100%;
+   background-color: #e5e5e5;
+   border-radius: 4px;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+/* .imageWrapper img { */
+/*    width: 100%; */
+/* } */
+
+.imgContainer {
+   /* display: grid; */
+   /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+   /* display: flex; */
+   column-count: 4;
+   column-gap: 20px;
+
+   & img {
+      /* width: 300px; */
+      /* object-fit: cover; */
+      box-shadow: var(--shadow-small);
+      border-radius: var(--border-radius-small);
+   }
+}
+
+.pagination {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   list-style: none;
+   padding: 0;
+   margin-top: 65px;
+   gap: 5px;
+
+   & li {
+      cursor: pointer;
+      background-color: transparent;
+      border: 2px solid var(--color-accent);
+      font-weight: var(--font-weight-medium);
+      border-radius: var(--border-radius-small);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 50px;
+
+      & a {
+         padding: 8px 12px;
+         text-decoration: none;
+      }
+
+      &:hover {
+         background-color: var(--color-accent-opacity);
+      }
+
+      &.activePage {
+         background-color: var(--color-accent);
+
+         & a {
+            color: var(--color-button-text);
+         }
+      }
+
+      &.prevBtn {
+         margin-right: 20px;
+      }
+      &.nextBtn {
+         margin-left: 20px;
+      }
+
+      &.disableBtn {
+         border: 2px solid grey;
+
+         &:hover {
+            cursor: not-allowed;
+            background-color: transparent;
+         }
+
+         & a {
+            color: grey;
+         }
+      }
+   }
+}
+
+@media (max-width: 1024px) {
+   .imgContainer {
+      column-count: 3;
+   }
+}
+
+@media (max-width: 768px) {
+   .imgContainer {
+      column-count: 2;
+   }
+}
