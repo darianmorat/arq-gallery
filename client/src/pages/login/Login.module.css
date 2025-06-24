@@ -3,16 +3,16 @@
    height: 100vh;
    justify-content: center;
    align-items: center;
-   background-color: #11111140;
 }
 
 .form {
-   background-color: grey;
    padding: 20px;
    gap: 20px;
    width: 400px;
    display: flex;
    flex-direction: column;
+   background-color: var(--color-background-secondary);
+   border-radius: var(--border-radius-small);
 
    & div {
       display: flex;
