@@ -1,1 +1,1 @@
-# arq-gallery
+# Arq Gallery
