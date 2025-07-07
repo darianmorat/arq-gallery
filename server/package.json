@@ -18,8 +18,10 @@
    "description": "",
    "devDependencies": {
       "@tsconfig/node22": "^22.0.2",
+      "@types/cookie-parser": "^1.4.9",
       "@types/cors": "^2.8.19",
       "@types/express": "^5.0.3",
+      "@types/jsonwebtoken": "^9.0.10",
       "@types/node": "^24.0.10",
       "@types/pg": "^8.15.4",
       "drizzle-kit": "^0.31.4",
@@ -28,9 +30,12 @@
    },
    "dependencies": {
       "@neondatabase/serverless": "^1.0.1",
+      "bcrypt-ts": "^7.1.0",
+      "cookie-parser": "^1.4.7",
       "cors": "^2.8.5",
       "drizzle-orm": "^0.44.2",
       "express": "^5.1.0",
+      "jsonwebtoken": "^9.0.2",
       "pg": "^8.16.3"
    }
 }
