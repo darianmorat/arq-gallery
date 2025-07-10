@@ -12,10 +12,11 @@ import {
    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const formSchema = z.object({
    email: z.string().email({ message: "Correo invalido" }),
-   password: z.string().min(8, { message: "Minimo 8 caracteres" }),
+   password: z.string().min(1, { message: "Contrasena invalida" }),
 });
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"form">) {
@@ -27,19 +28,11 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
       },
    });
 
+   const { authenticate, isLoading } = useAuthStore();
+
    function onSubmit(values: z.infer<typeof formSchema>) {
-      form.setValue("email", "");
-      form.setValue("password", "");
-
-      // useStoreFunction(values)
-      console.log(values);
-
-      // return new Promise((resolve) => {
-      //    setTimeout(() => {
-      //       console.log("Finished simulated login");
-      //       resolve(true);
-      //    }, 2000); // simulate 2-second delay
-      // });
+      authenticate(values.email, values.password);
+      // form.reset();
    }
 
    return (
@@ -87,7 +80,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                   className="w-full"
                   disabled={form.formState.isSubmitting}
                >
-                  {form.formState.isSubmitting ? "Iniciando Sesion..." : "Inicio Sesion"}
+                  {isLoading ? "Iniciando Sesion..." : "Inicio Sesion"}
                </Button>
             </div>
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
