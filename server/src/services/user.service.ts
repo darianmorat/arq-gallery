@@ -19,7 +19,6 @@ export const userService = {
    findById: async (id: string) => {
       const [user] = await db
          .select({
-            id: userTable.id,
             name: userTable.name,
             email: userTable.email,
             role: userTable.role,
