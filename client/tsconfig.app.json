@@ -25,6 +25,7 @@
       "jsx": "react-jsx",
       /* Linting */
       "strict": true,
+      "useUnknownInCatchVariables": false,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "erasableSyntaxOnly": true,
