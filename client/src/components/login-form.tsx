@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { useState } from "react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 const formSchema = z.object({
    email: z.string().email({ message: "Email invalido" }),
@@ -20,6 +22,8 @@ const formSchema = z.object({
 });
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"form">) {
+   const [showPassword, setShowPassword] = useState(false);
+
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -34,6 +38,10 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
       authenticate(values.email, values.password);
       // form.reset();
    }
+
+   const toggleShowPassword = () => {
+      setShowPassword(!showPassword);
+   };
 
    return (
       <Form {...form}>
@@ -52,6 +60,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                <FormField
                   control={form.control}
                   name="email"
+                  disabled={isLoading}
                   render={({ field }) => (
                      <FormItem>
                         <FormLabel>Email</FormLabel>
@@ -65,21 +74,33 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                <FormField
                   control={form.control}
                   name="password"
+                  disabled={isLoading}
                   render={({ field }) => (
                      <FormItem>
                         <FormLabel>Contraseña</FormLabel>
                         <FormControl>
-                           <Input placeholder="* * * * * * * *" {...field} />
+                           <div className="relative">
+                              <Input
+                                 type={showPassword ? "text" : "password"}
+                                 placeholder="* * * * * * * *"
+                                 {...field}
+                              />
+                              <Button
+                                 type="button"
+                                 variant={"ghost"}
+                                 className="absolute right-0 top-0 text-muted-foreground"
+                                 onClick={() => toggleShowPassword()}
+                                 disabled={isLoading}
+                              >
+                                 {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+                              </Button>
+                           </div>
                         </FormControl>
                         <FormMessage />
                      </FormItem>
                   )}
                />
-               <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={form.formState.isSubmitting}
-               >
+               <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? "Iniciando Sesion..." : "Inicio Sesion"}
                </Button>
             </div>
