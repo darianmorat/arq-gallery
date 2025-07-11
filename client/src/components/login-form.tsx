@@ -15,8 +15,8 @@ import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 const formSchema = z.object({
-   email: z.string().email({ message: "Correo invalido" }),
-   password: z.string().min(1, { message: "Contrasena invalida" }),
+   email: z.string().email({ message: "Email invalido" }),
+   password: z.string().min(1, { message: "Contraseña invalida" }),
 });
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"form">) {
@@ -67,7 +67,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                   name="password"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Contraseña</FormLabel>
                         <FormControl>
                            <Input placeholder="* * * * * * * *" {...field} />
                         </FormControl>
