@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import { Laptop, Moon, Sun } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
    DropdownMenu,
@@ -7,10 +7,43 @@ import {
    DropdownMenuItem,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTheme } from "./ThemeProvider";
 
 export function ModeToggle() {
-   const { setTheme } = useTheme();
+   const [theme, setTheme] = useState(localStorage.getItem("theme") || "system");
+
+   const applyTheme = (themeToApply: string) => {
+      const classList = document.documentElement.classList;
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      classList.remove("dark", "light");
+
+      const effectiveTheme =
+         themeToApply === "system"
+            ? systemPrefersDark
+               ? "dark"
+               : "light"
+            : themeToApply;
+
+      classList.add(effectiveTheme);
+      document.documentElement.setAttribute("data-theme", effectiveTheme);
+   };
+
+   useEffect(() => {
+      localStorage.setItem("theme", theme);
+      applyTheme(theme);
+
+      if (theme === "system") {
+         const darkMedia = window.matchMedia("(prefers-color-scheme: dark)");
+
+         const handleChange = () => {
+            applyTheme("system");
+            console.log("theme changed"); // testing
+         };
+
+         darkMedia.addEventListener("change", handleChange);
+         return () => darkMedia.removeEventListener("change", handleChange); // memory leaks, without this, handleChange is sent many times
+      }
+   }, [theme]);
 
    return (
       <DropdownMenu>
@@ -23,13 +56,13 @@ export function ModeToggle() {
          </DropdownMenuTrigger>
          <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => setTheme("light")}>
-               <Sun /> Light
+               <Sun /> Claro
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setTheme("dark")}>
-               <Moon /> Dark
+               <Moon /> Oscuro
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setTheme("system")}>
-               <Laptop /> System
+               <Laptop /> Sistema
             </DropdownMenuItem>
          </DropdownMenuContent>
       </DropdownMenu>
