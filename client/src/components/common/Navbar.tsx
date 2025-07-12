@@ -1,4 +1,4 @@
-import { Bell, GalleryVerticalEnd, LogOut, User } from "lucide-react";
+import { Bell, GalleryVerticalEnd, Layers, LogOut, User } from "lucide-react";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -20,53 +20,86 @@ export const Navbar = () => {
    const navigate = useNavigate();
 
    return (
-      <nav className="flex justify-between px-24 py-4 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
-         <a onClick={() => navigate("/")} className="flex items-center gap-2 font-medium">
-            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-               <GalleryVerticalEnd className="size-4" />
-            </div>
-            Arq Gallery
-         </a>
-         <div className="flex gap-4 items-center">
-            {isAuth ? (
-               <>
-                  <Input type="search" placeholder="Buscar..." />
-
-                  {isAdmin ? (
-                     <Button onClick={() => navigate("/dashboard")}>Dashboard</Button>
-                  ) : (
-                     <Button onClick={() => navigate("/create")}>Create</Button>
-                  )}
-                  <DropdownMenu>
-                     <DropdownMenuTrigger asChild>
-                        <Avatar>
-                           {/* this can be updated in profile for the user */}
-                           <AvatarImage src="https://github.com/shadcn.png" />
-                           {/* use the username initals, with a code snippet */}
-                           <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                     </DropdownMenuTrigger>
-                     <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => navigate("/profile")}>
-                           <User /> Perfil
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => navigate("#")}>
-                           <Bell /> Alertas
-                        </DropdownMenuItem>
-                        <Separator className="my-1" />
-                        <DropdownMenuItem
-                           className="text-red-500 dark:text-red-400 focus:text-red-500"
-                           onClick={() => logout()}
+      <nav className="w-full bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0">
+         <div className="max-w-7xl mx-auto p-4 flex gap-4">
+            <a
+               onClick={() => navigate("/")}
+               className="flex items-center gap-2 font-medium whitespace-nowrap cursor-pointer"
+            >
+               <div className="bg-primary text-primary-foreground flex size-9 items-center justify-center rounded-md">
+                  <GalleryVerticalEnd className="size-4" />
+               </div>
+               <p className="hidden sm:block">ArGallery</p>
+            </a>
+            <div className="w-full flex gap-4">
+               <Input type="search" placeholder="Buscar" className="grow" />
+               {isAuth ? (
+                  <>
+                     {isAdmin ? (
+                        <Button
+                           onClick={() => navigate("/dashboard")}
+                           className="hidden sm:block"
                         >
-                           <LogOut className="text-red-400" /> Cerrar sesión
-                        </DropdownMenuItem>
-                     </DropdownMenuContent>
-                  </DropdownMenu>
-               </>
-            ) : (
-               <Button onClick={() => navigate("/login")}>Login</Button>
-            )}
-            <ModeToggle />
+                           Dashboard
+                        </Button>
+                     ) : (
+                        <Button
+                           onClick={() => navigate("/create")}
+                           className="hidden sm:block"
+                        >
+                           Ilustración
+                        </Button>
+                     )}
+
+                     <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                           <Avatar className="h-full w-9 cursor-pointer">
+                              {/* this can be updated in profile for the user */}
+                              <AvatarImage src="https://github.com/shadcn.png" />
+                              {/* use the username initals, with a code snippet */}
+                              <AvatarFallback>CN</AvatarFallback>
+                           </Avatar>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                           <DropdownMenuItem onClick={() => navigate("/profile")}>
+                              <User /> Perfil
+                           </DropdownMenuItem>
+                           <DropdownMenuItem onClick={() => navigate("#")}>
+                              <Bell /> Alertas
+                           </DropdownMenuItem>
+
+                           {isAdmin ? (
+                              <DropdownMenuItem
+                                 onClick={() => navigate("/dashboard")}
+                                 className="sm:hidden"
+                              >
+                                 <Layers /> Dashboard
+                              </DropdownMenuItem>
+                           ) : (
+                              <DropdownMenuItem
+                                 onClick={() => navigate("/create")}
+                                 className="sm:hidden"
+                              >
+                                 <Layers /> Ilustración
+                              </DropdownMenuItem>
+                           )}
+
+                           <Separator className="my-1" />
+
+                           <DropdownMenuItem
+                              className="text-red-500 dark:text-red-400 focus:text-red-500"
+                              onClick={() => logout()}
+                           >
+                              <LogOut className="text-red-400" /> Cerrar sesión
+                           </DropdownMenuItem>
+                        </DropdownMenuContent>
+                     </DropdownMenu>
+                  </>
+               ) : (
+                  <Button onClick={() => navigate("/login")}>Acceder</Button>
+               )}
+               <ModeToggle />
+            </div>
          </div>
       </nav>
    );
