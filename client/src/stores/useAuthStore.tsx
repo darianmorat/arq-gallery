@@ -31,7 +31,6 @@ export const useAuthStore = create<Store>((set, get) => ({
 
    authenticate: async (email, password) => {
       set({ isLoading: true });
-
       try {
          const body = {
             email: email,
@@ -41,7 +40,7 @@ export const useAuthStore = create<Store>((set, get) => ({
          const res = await api.post("/auth/login", body);
 
          if (res.data.success) {
-            get().checkAuth();
+            await get().checkAuth();
             toast.success(res.data.message);
          }
       } catch (error) {
@@ -65,7 +64,7 @@ export const useAuthStore = create<Store>((set, get) => ({
    },
 
    checkAuth: async () => {
-      const cookie = document.cookie.includes("SESSION-102");
+      const cookie = document.cookie.includes("flag");
 
       if (!cookie) {
          set({ isAuth: false, checkingAuth: false, user: null });
@@ -89,7 +88,7 @@ export const useAuthStore = create<Store>((set, get) => ({
 
    startExpiryCountdown: () => {
       const checkExpiry = () => {
-         const cookie = document.cookie.includes("SESSION-102");
+         const cookie = document.cookie.includes("flag");
 
          if (!cookie) {
             get().logoutWithCountdown();
@@ -103,7 +102,7 @@ export const useAuthStore = create<Store>((set, get) => ({
    },
 
    logoutWithCountdown: () => {
-      if (get().isCountingDown || !get().isAuth) return;
+      if (!get().isAuth) return;
       set({ isCountingDown: true });
 
       let countdown = 5;
@@ -115,8 +114,8 @@ export const useAuthStore = create<Store>((set, get) => ({
 
          if (countdown <= 0) {
             clearInterval(timer);
-            set({ isAuth: false, isCountingDown: false, user: null });
-            toast.success("logged out successfull");
+            set({ isCountingDown: false });
+            get().logout();
          }
       }, 1000);
    },
