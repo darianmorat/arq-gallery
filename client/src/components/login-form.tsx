@@ -51,9 +51,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
             onSubmit={form.handleSubmit(onSubmit)}
          >
             <div className="flex flex-col items-center gap-2 text-center">
-               <h1 className="text-2xl font-bold">Inicio de sesion</h1>
+               <h1 className="text-2xl font-bold">Inicio de sesión</h1>
                <p className="text-muted-foreground text-sm text-balance">
-                  Ingresa tu correo y contrasena para continuar
+                  Ingresa tu correo y contraseña para continuar
                </p>
             </div>
             <div className="grid gap-6">
@@ -101,7 +101,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                   )}
                />
                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Iniciando Sesion..." : "Inicio Sesion"}
+                  {isLoading ? "Iniciando Sesión..." : "Inicio Sesión"}
                </Button>
             </div>
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
