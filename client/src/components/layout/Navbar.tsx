@@ -5,7 +5,7 @@ import {
    DropdownMenuItem,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "../ui/ModeToggle";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useAuthStore } from "@/stores/useAuthStore";
@@ -13,6 +13,7 @@ import { useIsAdmin } from "@/hooks/useIsAdmin";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
+import { LayoutContainer } from "./Container";
 
 export const Navbar = () => {
    const { isAuth, logout } = useAuthStore();
@@ -21,7 +22,7 @@ export const Navbar = () => {
 
    return (
       <nav className="w-full bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0">
-         <div className="max-w-7xl mx-auto p-4 flex gap-4">
+         <LayoutContainer className="flex gap-4">
             <a
                onClick={() => navigate("/")}
                className="flex items-center gap-2 font-medium whitespace-nowrap cursor-pointer"
@@ -100,7 +101,7 @@ export const Navbar = () => {
                )}
                <ModeToggle />
             </div>
-         </div>
+         </LayoutContainer>
       </nav>
    );
 };
