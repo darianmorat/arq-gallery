@@ -1,4 +1,4 @@
-import { Bell, GalleryVerticalEnd, Layers, LogOut, User } from "lucide-react";
+import { Bell, Layers, LogOut, User } from "lucide-react";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -24,12 +24,16 @@ export const Navbar = () => {
       <nav className="w-full bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0">
          <LayoutContainer className="flex gap-4">
             <a
+               href="#"
                onClick={() => navigate("/")}
                className="flex items-center gap-2 font-medium whitespace-nowrap cursor-pointer"
             >
-               <div className="bg-primary text-primary-foreground flex size-9 items-center justify-center rounded-md">
-                  <GalleryVerticalEnd className="size-4" />
-               </div>
+               <img
+                  src="https://flowbite.com/docs/images/logo.svg"
+                  className="h-8 size-10"
+                  alt="Flowbite Logo"
+               />
+
                <p className="hidden sm:block">ArGallery</p>
             </a>
             <div className="w-full flex gap-4">
