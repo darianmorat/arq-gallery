@@ -4,15 +4,9 @@ import { compare } from "bcrypt-ts";
 import { jwtGenerator } from "../utils/jwtGenerator";
 import { clearCookie, setCookie } from "../utils/setCookie";
 
-// import { genSaltSync, hashSync } from "bcrypt-ts";
-// TESTING
-// const salt = genSaltSync(10);
-// const result = hashSync("1082124119", salt);
-
 export const authenticate = async (req: Request, res: Response) => {
    try {
       const { email, password } = req.body;
-
       const user = await userService.findByEmail(email);
 
       if (!user) {
@@ -55,7 +49,7 @@ export const logout = (_req: Request, res: Response) => {
 
       res.status(200).json({
          success: true,
-         message: "Logout successful",
+         message: "Session cerrada",
       });
    } catch (error) {
       res.status(500).json({
@@ -71,7 +65,6 @@ interface AuthRequest extends Request {
 
 export const verify = async (req: AuthRequest, res: Response) => {
    const { userId } = req.user;
-
    const getUserData = await userService.findById(userId);
    const userData = getUserData;
 
