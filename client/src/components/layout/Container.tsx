@@ -1,14 +1,20 @@
 import type { PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 
-// SMALL NOTE:
-// You can add a parameter called size to create a reusable component which would contain
-// different screen sizes such as max-w-4xl when using size='small'
+type containerSize = "large" | "medium";
 
 type ContainerProps = PropsWithChildren<{
    className?: string;
+   size?: containerSize;
 }>;
 
-export const LayoutContainer: React.FC<ContainerProps> = ({ children, className }) => (
-   <div className={cn("max-w-7xl mx-auto p-4", className)}>{children}</div>
-);
+const sizeVariants = {
+   large: "max-w-7xl",
+   medium: "max-w-5xl",
+};
+
+export const LayoutContainer: React.FC<ContainerProps> = ({
+   children,
+   className,
+   size = "large",
+}) => <div className={cn(sizeVariants[size], "mx-auto p-4", className)}>{children}</div>;
