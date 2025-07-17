@@ -16,9 +16,10 @@ import { Separator } from "../ui/separator";
 import { LayoutContainer } from "./Container";
 
 export const Navbar = () => {
-   const { isAuth, logout } = useAuthStore();
+   const { isAuth, user, logout } = useAuthStore();
    const isAdmin = useIsAdmin();
    const navigate = useNavigate();
+   const shortUserName = user?.name.slice(0, 1);
 
    return (
       <nav className="w-full bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0">
@@ -60,9 +61,11 @@ export const Navbar = () => {
                         <DropdownMenuTrigger asChild>
                            <Avatar className="h-full w-9 cursor-pointer">
                               {/* this can be updated in profile for the user */}
-                              <AvatarImage src="https://github.com/shadcn.png" />
+                              <AvatarImage src="" />
                               {/* use the username initals, with a code snippet */}
-                              <AvatarFallback>CN</AvatarFallback>
+                              <AvatarFallback className="bg-blue-200/80 text-blue-600 text-xl pb-0.5">
+                                 {shortUserName}
+                              </AvatarFallback>
                            </Avatar>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
