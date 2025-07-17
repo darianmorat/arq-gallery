@@ -76,14 +76,14 @@ export const Profile = () => {
 
          {/* Actions */}
          <div className="flex justify-end space-x-3">
-            <Button variant="outline" className="flex items-center">
+            <Button variant="outline">
                <User className="w-4 h-4 mr-2" />
                Editar perfil
             </Button>
             <Button
-               variant="destructive"
+               variant="outline"
+               className="text-red-600 hover:text-red-700 hover:bg-red-50"
                onClick={() => logout()}
-               className="flex items-center"
             >
                <LogOut className="w-4 h-4 mr-2" />
                Cerrar sesión

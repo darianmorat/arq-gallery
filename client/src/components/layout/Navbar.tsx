@@ -22,7 +22,7 @@ export const Navbar = () => {
    const shortUserName = user?.name.slice(0, 1);
 
    return (
-      <nav className="w-full bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0">
+      <nav className="w-full bg-zinc-100 dark:bg-zinc-900 border-b sticky top-0 z-1">
          <LayoutContainer className="flex gap-4">
             <a
                href="#"
@@ -95,10 +95,10 @@ export const Navbar = () => {
                            <Separator className="my-1" />
 
                            <DropdownMenuItem
-                              className="text-red-500 dark:text-red-400 focus:text-red-500"
+                              className="text-red-600 focus:text-red-700 focus:bg-red-50 dark:focus:bg-red-50/10 dark:font-medium"
                               onClick={() => logout()}
                            >
-                              <LogOut className="text-red-400" /> Cerrar sesión
+                              <LogOut className="text-red-600" /> Cerrar sesión
                            </DropdownMenuItem>
                         </DropdownMenuContent>
                      </DropdownMenu>

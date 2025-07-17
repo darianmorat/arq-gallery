@@ -95,7 +95,7 @@ export const useAuthStore = create<Store>((set, get) => ({
             return;
          }
 
-         setTimeout(checkExpiry, 10000);
+         setTimeout(checkExpiry, 15 * 60 * 1000); // 15m
       };
 
       checkExpiry();
@@ -106,7 +106,7 @@ export const useAuthStore = create<Store>((set, get) => ({
       set({ isCountingDown: true });
 
       let countdown = 5;
-      toast.info(`Session expired! Logging out in ${countdown} seconds...`);
+      // toast.info(`Session expired! Logging out in ${countdown} seconds...`);
 
       const timer = setInterval(() => {
          countdown--;

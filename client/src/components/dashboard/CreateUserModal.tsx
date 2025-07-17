@@ -131,7 +131,7 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
                                     <Input
                                        type={showPassword ? "text" : "password"}
                                        placeholder={
-                                          showPassword ? "Contraseña" : "********"
+                                          showPassword ? "Contraseña" : "••••••••"
                                        }
                                        {...field}
                                        className="pl-10"

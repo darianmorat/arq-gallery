@@ -81,14 +81,12 @@ export const Categories = () => {
                            </span>
                         </td>
                         <td className="px-6 py-4 text-right space-x-2">
-                           <Button
-                              variant="outline"
-                           >
+                           <Button variant="outline">
                               <PencilLine /> Editar
                            </Button>
                            <Button
-                              variant="destructive"
-                              className="border border-red-500 text-red-500 bg-white hover:bg-red-500 hover:text-white dark:bg-transparent dark:hover:bg-red-700 dark:border-red-400 dark:text-red-400 dark:hover:text-white"
+                              variant="outline"
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
                            >
                               <Trash /> Eliminar
                            </Button>

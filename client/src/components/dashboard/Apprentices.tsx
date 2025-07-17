@@ -76,8 +76,8 @@ export const Apprentices = () => {
                               <List /> Ver posts
                            </Button>
                            <Button
-                              variant="destructive"
-                              className="border border-red-500 text-red-500 bg-white hover:bg-red-500 hover:text-white dark:bg-transparent dark:hover:bg-red-700 dark:border-red-400 dark:text-red-400 dark:hover:text-white"
+                              variant="outline"
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
                               onClick={() => {
                                  (handleModal("delete"), setSelectedUser(user));
                               }}

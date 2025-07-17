@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useState } from "react";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, Lock, User } from "lucide-react";
 
 const formSchema = z.object({
    email: z.string().email({ message: "Email invalido" }),
@@ -65,7 +65,17 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                      <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                           <Input placeholder="jhon@gmail.com" {...field} />
+                           <div className="relative">
+                              <User
+                                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                 size={18}
+                              />
+                              <Input
+                                 placeholder="jhon@gmail.com"
+                                 {...field}
+                                 className="pl-10"
+                              />
+                           </div>
                         </FormControl>
                         <FormMessage />
                      </FormItem>
@@ -80,10 +90,16 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                         <FormLabel>Contraseña</FormLabel>
                         <FormControl>
                            <div className="relative">
+                              <Lock
+                                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                 size={18}
+                              />
+
                               <Input
                                  type={showPassword ? "text" : "password"}
-                                 placeholder="* * * * * * * *"
+                                 placeholder={showPassword ? "Contraseña" : "••••••••"}
                                  {...field}
+                                 className="pl-10"
                               />
                               <Button
                                  type="button"
