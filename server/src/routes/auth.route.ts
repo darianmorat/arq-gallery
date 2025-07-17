@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post("/login", authenticate);
 router.post("/logout", logout);
-
 router.get("/verify", privateRoute, verify);
 
 export default router;
