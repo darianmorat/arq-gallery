@@ -1,13 +1,12 @@
+import { LayoutContainer } from "@/components/layout/Container";
 import { images } from "@/data/images";
 
 export const Home = () => {
    return (
-      <>
-         <div className="flex flex-wrap gap-3 p-10">
-            {images.map((img, i) => (
-               <img className="w-25 h-17" key={i} src={img} alt={`image+${img}`} />
-            ))}
-         </div>
-      </>
+      <LayoutContainer className="columns-2 md:columns-4 lg:columns-5 gap-4 space-y-4">
+         {images.map((img, i) => (
+            <img className="w-full rounded-lg" key={i} src={img} alt={`image+${img}`} />
+         ))}
+      </LayoutContainer>
    );
 };

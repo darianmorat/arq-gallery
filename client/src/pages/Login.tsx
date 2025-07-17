@@ -1,18 +1,26 @@
-import { GalleryVerticalEnd } from "lucide-react";
-import { LoginForm } from "@/components/login-form";
+import { LoginForm } from "@/components/auth/login-form";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+   const navigate = useNavigate();
+
    return (
       <div className="grid min-h-svh lg:grid-cols-2">
          <div className="flex flex-col gap-4 p-6 md:p-10">
             <div className="flex justify-center gap-2 md:justify-start">
-               {/* use navigate instead of href */}
-               <a href="/" className="flex items-center gap-2 font-medium">
-                  <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-                     <GalleryVerticalEnd className="size-4" />
-                  </div>
+               <a
+                  href="#"
+                  onClick={() => navigate("/")}
+                  className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+               />
+               <img
+                  src="https://flowbite.com/docs/images/logo.svg"
+                  className="h-8 size-10"
+                  alt="Flowbite Logo"
+               />
+               <span className="self-center font-semibold whitespace-nowrap dark:text-white">
                   Arq Gallery
-               </a>
+               </span>
             </div>
             <div className="flex flex-1 items-center justify-center">
                <div className="w-full max-w-xs">
