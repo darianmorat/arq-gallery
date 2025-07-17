@@ -8,7 +8,7 @@ interface AuthRequest extends Request {
 
 export const privateRoute = (req: AuthRequest, res: Response, next: NextFunction) => {
    try {
-      const authCookie = req.cookies["SESSION-101"];
+      const authCookie = req.cookies["auth"]; // what about flag
 
       if (!authCookie) {
          res.status(401).json({
