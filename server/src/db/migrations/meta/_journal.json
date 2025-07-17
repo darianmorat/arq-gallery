@@ -8,6 +8,13 @@
       "when": 1752156154938,
       "tag": "0000_unknown_valkyrie",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1752770747141,
+      "tag": "0001_natural_doomsday",
+      "breakpoints": true
     }
   ]
 }
