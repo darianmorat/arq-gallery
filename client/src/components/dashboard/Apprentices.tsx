@@ -6,9 +6,14 @@ import { CreateUserModal } from "./CreateUserModal";
 import { useDashStore } from "@/stores/useDashStore";
 import { DeleteUserModal } from "./DeleteUserModal";
 
+type User = {
+   id: string;
+   name: string;
+};
+
 export const Apprentices = () => {
    const [showModal, setShowModal] = useState({ active: false, for: "" });
-   const [selectedUser, setSelectedUser] = useState({});
+   const [selectedUser, setSelectedUser] = useState<User | null>(null);
    const { users, getUsers } = useDashStore();
 
    const handleModal = (modal: string): void => {
@@ -94,7 +99,7 @@ export const Apprentices = () => {
          {showModal.active && showModal.for === "create" && (
             <CreateUserModal handleModal={() => handleModal("")} />
          )}
-         {showModal.active && showModal.for === "delete" && (
+         {showModal.active && showModal.for === "delete" && selectedUser && (
             <DeleteUserModal handleModal={() => handleModal("")} user={selectedUser} />
          )}
       </>
