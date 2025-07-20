@@ -8,17 +8,31 @@ type User = {
    email: string;
 };
 
+// type Category = {
+//    id: string;
+//    name: string;
+//    description: string;
+// };
+
 type Store = {
    isLoading: boolean;
    users: User[];
+   // categories: Category[];
    getUsers: () => Promise<void>;
-   createUser: (name: string, email: string, password: string) => Promise<void>;
+   createUser: (
+      name: string,
+      username: string,
+      email: string,
+      password: string,
+   ) => Promise<void>;
    deleteUser: (id: string) => Promise<void>;
+   // getCategories: () => Promise<void>;
 };
 
 export const useDashStore = create<Store>((set, get) => ({
    isLoading: false,
    users: [],
+   // categories: [],
 
    getUsers: async () => {
       set({ isLoading: true });
@@ -34,11 +48,12 @@ export const useDashStore = create<Store>((set, get) => ({
       }
    },
 
-   createUser: async (name, email, password) => {
+   createUser: async (name, username, email, password) => {
       set({ isLoading: true });
       try {
          const body = {
             name: name,
+            username: username,
             email: email,
             password: password,
          };
@@ -71,4 +86,18 @@ export const useDashStore = create<Store>((set, get) => ({
          set({ isLoading: false });
       }
    },
+
+   // getCategories: async () => {
+   //    set({ isLoading: true });
+   //    try {
+   //       const res = await api.get("/admin/categorie/get-all");
+   //       if (res.data.success) {
+   //          set({ categories: res.data.categories });
+   //       }
+   //    } catch (error) {
+   //       toast.error(error.response.data.message);
+   //    } finally {
+   //       set({ isLoading: false });
+   //    }
+   // },
 }));
