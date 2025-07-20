@@ -5,7 +5,7 @@ export const Footer = () => {
    const navigate = useNavigate();
 
    return (
-      <footer className="border-t mt-8 bg-zinc-100 dark:bg-zinc-900">
+      <footer className="border-t mt-5 bg-zinc-100 dark:bg-zinc-900">
          <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div className="sm:flex sm:items-center sm:justify-between">
                <a

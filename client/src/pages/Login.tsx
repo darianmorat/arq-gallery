@@ -8,17 +8,16 @@ export const Login = () => {
       <div className="grid min-h-svh lg:grid-cols-2">
          <div className="flex flex-col gap-4 p-6 md:p-10">
             <div className="flex justify-center gap-2 md:justify-start">
-               <a
-                  href="#"
-                  onClick={() => navigate("/")}
-                  className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
-               />
                <img
                   src="https://flowbite.com/docs/images/logo.svg"
-                  className="h-8 size-10"
+                  className="h-8 size-10 cursor-pointer"
                   alt="Flowbite Logo"
+                  onClick={() => navigate("/")}
                />
-               <span className="self-center font-semibold whitespace-nowrap dark:text-white">
+               <span
+                  className="self-center font-semibold whitespace-nowrap dark:text-white cursor-pointer"
+                  onClick={() => navigate("/")}
+               >
                   Arq Gallery
                </span>
             </div>

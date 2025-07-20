@@ -8,25 +8,12 @@ export const Home = () => {
 
    useEffect(() => {
       getImages();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    return (
       <LayoutContainer className="columns-2 md:columns-4 lg:columns-5 gap-4 space-y-4 min-h-screen">
-         {[
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-            ...images,
-         ].map((img, i) => (
-            // {/* {images.map((img, i) => ( */}
+         {images.map((img, i) => (
             <div
                key={i}
                className="group relative overflow-hidden rounded-lg cursor-pointer transition-transform duration-200 hover:scale-[1.02]"

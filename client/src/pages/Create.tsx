@@ -7,8 +7,9 @@ import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import { usePostStore } from "@/stores/usePostStore";
 
-// PENDING
-// Avoid imagen repetition
+// PENDING:
+// JUST ALLOW 1 IMAGE UPLOAD AND 1 IMAGE WITH THE 3D MODEL, FOR NOW WE JUST LET THE USERS
+// TO UPLOAD AN IMAGE, THEN WE CAN UPDATE THE LOGIC FOR THE 3D MODEL
 
 interface FileWithPreview extends File {
    preview: string;
