@@ -4,6 +4,7 @@ import api from "@/api/axios";
 
 type User = {
    name: string;
+   username: string;
    email: string;
    role: "admin" | "user";
    createdAt: string;

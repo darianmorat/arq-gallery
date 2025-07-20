@@ -37,7 +37,8 @@ export const DeleteUserModal = ({ handleModal, user }: DeleteUserModalProps) => 
                   variant={"default"}
                   type="submit"
                   onClick={() => {
-                     (deleteUser(user.id), handleModal());
+                     deleteUser(user.id);
+                     handleModal();
                   }}
                   // disabled={isLoading}
                   className="grow"

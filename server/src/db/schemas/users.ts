@@ -6,6 +6,7 @@ export const userTable = pgTable("users", {
       .primaryKey()
       .default(sql`gen_random_uuid()`),
    name: varchar({ length: 50 }).notNull(),
+   username: varchar({ length: 30 }).notNull().unique(),
    email: varchar({ length: 255 }).notNull().unique(),
    password: varchar({ length: 60 }).notNull(),
    role: varchar({ length: 20 }).notNull().default("user"),

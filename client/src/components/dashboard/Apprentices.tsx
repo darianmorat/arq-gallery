@@ -6,6 +6,10 @@ import { CreateUserModal } from "./CreateUserModal";
 import { useDashStore } from "@/stores/useDashStore";
 import { DeleteUserModal } from "./DeleteUserModal";
 
+// PENDING:
+// DINAMIC POSTS FOR THE APPRENTICES IN THE TABLE
+// TAKE ALL THE POSTS TO ALSO SHOW THE POSTS DINAMICALY
+
 type User = {
    id: string;
    name: string;
@@ -22,6 +26,7 @@ export const Apprentices = () => {
 
    useEffect(() => {
       getUsers();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    return (
@@ -84,7 +89,8 @@ export const Apprentices = () => {
                               variant="outline"
                               className="text-red-600 hover:text-red-700 hover:bg-red-50"
                               onClick={() => {
-                                 (handleModal("delete"), setSelectedUser(user));
+                                 handleModal("delete");
+                                 setSelectedUser(user);
                               }}
                            >
                               <Trash /> Eliminar

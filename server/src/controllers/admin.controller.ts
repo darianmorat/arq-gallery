@@ -19,10 +19,19 @@ export const getUsers = async (_req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
    try {
-      const { name, email, password } = req.body;
-      const userExist = await userService.findByEmail(email);
+      const { name, username, email, password } = req.body;
+      const emailUsed = await userService.findByEmail(email);
+      const usernameUsed = await userService.findByUsername(username);
 
-      if (userExist) {
+      if (usernameUsed) {
+         res.status(401).json({
+            success: false,
+            message: "Este usuario ya está en uso",
+         });
+         return;
+      }
+
+      if (emailUsed) {
          res.status(401).json({
             success: false,
             message: "Este correo ya está en uso",
@@ -30,7 +39,7 @@ export const createUser = async (req: Request, res: Response) => {
          return;
       }
 
-      const newUser = await userService.create(name, email, password);
+      const newUser = await userService.create(name, username, email, password);
 
       res.status(200).json({
          success: true,

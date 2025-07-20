@@ -11,10 +11,14 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
-import { User, Mail, Lock, X, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Lock, X, Eye, EyeOff, AtSign } from "lucide-react";
 import { useState } from "react";
 import { useDashStore } from "@/stores/useDashStore";
 import { Modal } from "./Modal";
+
+// PENDING:
+// WE SHOULD NOT CLOSE THE MODAL WHEN THE USERNAME OR EMAIL IS ALREADY IN USE, WE
+// SHOULD INSTEAD JUST SHOW THE NOTIFICATION AND KEEP IT OPEN
 
 type CreateUserModalProps = {
    handleModal: (modal: string) => void;
@@ -22,6 +26,7 @@ type CreateUserModalProps = {
 
 const formSchema = z.object({
    name: z.string().min(4, { message: "Minimo 4 caracteres" }),
+   username: z.string().min(4, { message: "Minimo 4 caracteres" }),
    email: z.string().email({ message: "Email invalido" }),
    password: z.string().min(1, { message: "Contraseña invalida" }),
 });
@@ -34,13 +39,14 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
       resolver: zodResolver(formSchema),
       defaultValues: {
          name: "",
+         username: "",
          email: "",
          password: "",
       },
    });
 
    function onSubmit(values: z.infer<typeof formSchema>) {
-      createUser(values.name, values.email, values.password);
+      createUser(values.name, values.username, values.email, values.password);
       handleModal("");
       form.reset();
    }
@@ -82,6 +88,30 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
                                     />
                                     <Input
                                        placeholder="Jhon Smith"
+                                       {...field}
+                                       className="pl-10"
+                                    />
+                                 </div>
+                              </FormControl>
+                              <FormMessage />
+                           </FormItem>
+                        )}
+                     />
+                     <FormField
+                        control={form.control}
+                        name="username"
+                        // disabled={isLoading}
+                        render={({ field }) => (
+                           <FormItem>
+                              <FormLabel>Usuario</FormLabel>
+                              <FormControl>
+                                 <div className="relative">
+                                    <AtSign
+                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                       size={18}
+                                    />
+                                    <Input
+                                       placeholder="jhon06_"
                                        {...field}
                                        className="pl-10"
                                     />
@@ -156,16 +186,16 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
                            variant={"default"}
                            type="submit"
                            // disabled={isLoading}
-                           className="grow"
+                           className="flex-1/2"
                         >
-                           Aceptar
+                           Crear
                         </Button>
                         <Button
                            type="button"
                            variant={"outline"}
                            onClick={() => handleModal("")}
                            // disabled={isLoading}
-                           className="grow"
+                           className="flex-1/2"
                         >
                            Cancelar
                         </Button>

@@ -17,10 +17,24 @@ export const userService = {
       return user;
    },
 
+   findByUsername: async (username: string) => {
+      const [user] = await db
+         .select({
+            id: userTable.id,
+            password: userTable.password,
+         })
+         .from(userTable)
+         .where(eq(userTable.username, username))
+         .limit(1);
+
+      return user;
+   },
+
    findById: async (id: string) => {
       const [user] = await db
          .select({
             name: userTable.name,
+            username: userTable.username,
             email: userTable.email,
             role: userTable.role,
             createdAt: userTable.createdAt,
@@ -32,7 +46,7 @@ export const userService = {
       return user;
    },
 
-   // Admin Operations
+   // admin operations
    getAll: async () => {
       const users = await db
          .select({
@@ -45,7 +59,7 @@ export const userService = {
       return users;
    },
 
-   create: async (name: string, email: string, password: string) => {
+   create: async (name: string, username: string, email: string, password: string) => {
       const salt = await genSalt(10);
       const hashedPassword = await hash(password, salt);
 
@@ -53,6 +67,7 @@ export const userService = {
          .insert(userTable)
          .values({
             name,
+            username,
             email,
             password: hashedPassword,
          })
@@ -70,6 +85,16 @@ export const userService = {
          .delete(userTable)
          .where(eq(userTable.id, id))
          .returning({ name: userTable.name });
+
+      return user;
+   },
+
+   // public operations
+   getUser: async (username: string) => {
+      const [user] = await db
+         .select()
+         .from(userTable)
+         .where(eq(userTable.username, username));
 
       return user;
    },

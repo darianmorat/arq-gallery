@@ -11,6 +11,7 @@ import { useIsAdmin } from "./hooks/useIsAdmin";
 import { Profile } from "./pages/Profile";
 import { Create } from "./pages/Create";
 import { LoadingSpinner } from "./components/ui/LoadingSpinner";
+import { NotFound } from "./pages/NotFound";
 
 function App() {
    const { isAuth, checkingAuth, checkAuth } = useAuthStore();
@@ -33,23 +34,19 @@ function App() {
                   path="/dashboard"
                   element={isAuth && isAdmin ? <Dashboard /> : <Navigate to={"/"} />}
                />
-               <Route
-                  path="/profile"
-                  element={isAuth ? <Profile /> : <Navigate to={"/"} />}
-               />
+               <Route path="/:username" element={<Profile />} />
                <Route
                   path="/create"
                   element={isAuth ? <Create /> : <Navigate to={"/"} />}
                />
             </Route>
-
             <Route element={<Minimal />}>
                <Route
                   path="/login"
                   element={isAuth ? <Navigate to={"/"} /> : <Login />}
                />
             </Route>
-            <Route path="*" element={<Navigate to={"/"} />} />
+            <Route path="/404" element={<NotFound />} />
          </Routes>
 
          <ToastContainer

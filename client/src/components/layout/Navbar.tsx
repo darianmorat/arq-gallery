@@ -15,17 +15,21 @@ import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { LayoutContainer } from "./Container";
 
+// PENDING:
+// ADD AN AVATAR IMAGE FROM THE EDIT PROFILE, THIS CAN BE STORED IN THE CURRENT CLOUD
+// PROVIDER, SO WE CAN HAVE MORE PERSONALIZATION
+
 export const Navbar = () => {
    const { isAuth, user, logout } = useAuthStore();
    const isAdmin = useIsAdmin();
    const navigate = useNavigate();
    const shortUserName = user?.name.slice(0, 1);
+   const username = user?.username;
 
    return (
       <nav className="w-full bg-zinc-100 dark:bg-zinc-900 border-b sticky top-0 z-1">
          <LayoutContainer className="flex gap-4">
             <a
-               href="#"
                onClick={() => navigate("/")}
                className="flex items-center gap-2 font-medium whitespace-nowrap cursor-pointer"
             >
@@ -60,16 +64,14 @@ export const Navbar = () => {
                      <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                            <Avatar className="h-full w-9 cursor-pointer">
-                              {/* this can be updated in profile for the user */}
                               <AvatarImage src="" />
-                              {/* use the username initals, with a code snippet */}
                               <AvatarFallback className="bg-blue-200/80 text-blue-600 text-xl pb-0.5">
                                  {shortUserName}
                               </AvatarFallback>
                            </Avatar>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                           <DropdownMenuItem onClick={() => navigate("/profile")}>
+                           <DropdownMenuItem onClick={() => navigate(`/${username}`)}>
                               <User /> Perfil
                            </DropdownMenuItem>
                            <DropdownMenuItem onClick={() => navigate("#")}>
