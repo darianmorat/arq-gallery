@@ -11,58 +11,64 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
-import { User, Mail, Lock, X, Eye, EyeOff, AtSign } from "lucide-react";
-import { useState } from "react";
+import { X, FileText, Hash, AlignLeft } from "lucide-react";
 import { useDashStore } from "@/stores/useDashStore";
 import { Modal } from "./Modal";
+import { Textarea } from "../ui/textarea";
 
 // PENDING:
 // WE SHOULD NOT CLOSE THE MODAL WHEN THE USERNAME OR EMAIL IS ALREADY IN USE, WE
 // SHOULD INSTEAD JUST SHOW THE NOTIFICATION AND KEEP IT OPEN
 
-type CreateUserModalProps = {
+type CreateCategoryModalProps = {
    handleModal: (modal: string) => void;
 };
 
 const formSchema = z.object({
-   name: z.string().min(4, { message: "Minimo 4 caracteres" }),
-   username: z.string().min(4, { message: "Minimo 4 caracteres" }),
-   email: z.string().email({ message: "Email invalido" }),
-   password: z.string().min(1, { message: "Contraseña invalida" }),
+   title: z
+      .string()
+      .min(4, { message: "Mínimo 4 caracteres" })
+      .max(100, { message: "Máximo 100 caracteres" }),
+   tag: z
+      .string()
+      .min(4, { message: "Mínimo 4 caracteres" })
+      .max(50, { message: "Máximo 50 caracteres" })
+      .regex(/^[a-zA-Z0-9-_]+$/, {
+         message: "Solo letras, números, guiones y guiones bajos",
+      })
+      .transform((val) => val.toLowerCase()),
+   description: z
+      .string()
+      .min(10, { message: "Mínimo 10 caracteres" })
+      .max(300, { message: "Máximo 300 caracteres" }),
 });
 
-export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
-   const [showPassword, setShowPassword] = useState(false);
-   const { createUser } = useDashStore();
+export const CreateCategoryModal = ({ handleModal }: CreateCategoryModalProps) => {
+   const { createCategory } = useDashStore();
 
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-         name: "",
-         username: "",
-         email: "",
-         password: "",
+         title: "",
+         tag: "",
+         description: "",
       },
    });
 
    function onSubmit(values: z.infer<typeof formSchema>) {
-      createUser(values.name, values.username, values.email, values.password);
+      createCategory(values.title, values.tag, values.description);
       handleModal("");
       form.reset();
    }
-
-   const toggleShowPassword = () => {
-      setShowPassword((prev) => !prev);
-   };
 
    return (
       <Modal>
          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
                <div className="relative bg-background dark:bg-accent p-6 rounded-lg m-4 w-full max-w-100">
-                  <h1 className="text-2xl font-bold">Crear usuario</h1>
+                  <h1 className="text-2xl font-bold">Crear categoria</h1>
                   <p className="text-muted-foreground text-sm">
-                     Completa la información para crear una nueva cuenta
+                     Completa la información para crear una nueva categoria
                   </p>
                   <Button
                      type="button"
@@ -75,19 +81,19 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
                   <div className="grid gap-4 pt-5">
                      <FormField
                         control={form.control}
-                        name="name"
+                        name="title"
                         // disabled={isLoading}
                         render={({ field }) => (
                            <FormItem>
-                              <FormLabel>Nombre</FormLabel>
+                              <FormLabel>Title</FormLabel>
                               <FormControl>
                                  <div className="relative">
-                                    <User
+                                    <FileText
                                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
                                        size={18}
                                     />
                                     <Input
-                                       placeholder="Jhon Smith"
+                                       placeholder="Edificio las flores"
                                        {...field}
                                        className="pl-10"
                                     />
@@ -99,19 +105,19 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
                      />
                      <FormField
                         control={form.control}
-                        name="username"
+                        name="tag"
                         // disabled={isLoading}
                         render={({ field }) => (
                            <FormItem>
-                              <FormLabel>Usuario</FormLabel>
+                              <FormLabel>Tag</FormLabel>
                               <FormControl>
                                  <div className="relative">
-                                    <AtSign
+                                    <Hash
                                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
                                        size={18}
                                     />
                                     <Input
-                                       placeholder="jhon06_"
+                                       placeholder="religion"
                                        {...field}
                                        className="pl-10"
                                     />
@@ -123,58 +129,23 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
                      />
                      <FormField
                         control={form.control}
-                        name="email"
+                        name="description"
                         // disabled={isLoading}
                         render={({ field }) => (
                            <FormItem>
-                              <FormLabel>Correo</FormLabel>
+                              <FormLabel>Description</FormLabel>
                               <FormControl>
                                  <div className="relative">
-                                    <Mail
-                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                                       size={18}
+                                    <AlignLeft
+                                       className="absolute left-3 top-5 transform -translate-y-1/2 text-muted-foreground"
+                                       size={20}
                                     />
-                                    <Input
-                                       placeholder="jhon@gmail.com"
+                                    <Textarea
+                                       placeholder="Describe la categoría y su propósito..."
                                        {...field}
-                                       className="pl-10"
+                                       className="pl-10 h-30 resize-none"
+                                       rows={5}
                                     />
-                                 </div>
-                              </FormControl>
-                              <FormMessage />
-                           </FormItem>
-                        )}
-                     />
-                     <FormField
-                        control={form.control}
-                        name="password"
-                        // disabled={isLoading}
-                        render={({ field }) => (
-                           <FormItem>
-                              <FormLabel>Contraseña</FormLabel>
-                              <FormControl>
-                                 <div className="relative">
-                                    <Lock
-                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                                       size={18}
-                                    />
-                                    <Input
-                                       type={showPassword ? "text" : "password"}
-                                       placeholder={
-                                          showPassword ? "Contraseña" : "••••••••"
-                                       }
-                                       {...field}
-                                       className="pl-10"
-                                    />
-                                    <Button
-                                       type="button"
-                                       variant={"ghost"}
-                                       className="absolute right-0 top-0 text-muted-foreground"
-                                       onClick={() => toggleShowPassword()}
-                                       // disabled={isLoading}
-                                    >
-                                       {showPassword ? <Eye /> : <EyeOff />}
-                                    </Button>
                                  </div>
                               </FormControl>
                               <FormMessage />

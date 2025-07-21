@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { v2 as cloudinary } from "cloudinary";
 import { db } from "../db";
-import { postsTable } from "../db/schema";
+import { posts } from "../db/schema";
 import { postService } from "../services/post.service";
 
 cloudinary.config({
@@ -40,7 +40,7 @@ export const metadata = async (req: AuthRequest, res: Response): Promise<void> =
    }
 
    try {
-      await db.insert(postsTable).values({
+      await db.insert(posts).values({
          publicId: public_id,
          mediaUrl: secure_url,
          resourceType: resource_type,

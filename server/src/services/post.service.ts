@@ -1,15 +1,15 @@
 import { db } from "../db";
-import { postsTable } from "../db/schema";
+import { posts } from "../db/schema";
 
 export const postService = {
    getAll: async () => {
-      const posts = await db
+      const allPosts = await db
          .select({
-            id: postsTable.id,
-            mediaUrl: postsTable.mediaUrl,
+            id: posts.id,
+            mediaUrl: posts.mediaUrl,
          })
-         .from(postsTable);
+         .from(posts);
 
-      return posts;
+      return allPosts;
    },
 };

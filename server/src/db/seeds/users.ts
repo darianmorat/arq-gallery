@@ -1,5 +1,5 @@
 import { db } from "../index";
-import { userTable } from "../schema";
+import { users } from "../schema";
 
 // REMEMBER:
 // THIS SEED IS JUST USED FOR INFORMATION LIKE PRODUCTS, DECORATORS, ETC. NEVER FOR
@@ -29,7 +29,7 @@ export const seedUsers = async () => {
    ];
 
    try {
-      await db.insert(userTable).values(userData);
+      await db.insert(users).values(userData);
       console.log("Users seeded successfully");
    } catch (error) {
       console.error("Error seeding users:", error);

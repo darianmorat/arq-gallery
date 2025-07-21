@@ -18,7 +18,7 @@ type User = {
 export const Apprentices = () => {
    const [showModal, setShowModal] = useState({ active: false, for: "" });
    const [selectedUser, setSelectedUser] = useState<User | null>(null);
-   const { users, getUsers } = useDashStore();
+   const { users = [], getUsers } = useDashStore();
 
    const handleModal = (modal: string): void => {
       setShowModal((prev) => ({ active: !prev.active, for: modal }));

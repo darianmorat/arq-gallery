@@ -1,17 +1,17 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
-import { userTable } from "../db/schema";
+import { users } from "../db/schema";
 import { genSalt, hash } from "bcrypt-ts";
 
 export const userService = {
    findByEmail: async (email: string) => {
       const [user] = await db
          .select({
-            id: userTable.id,
-            password: userTable.password,
+            id: users.id,
+            password: users.password,
          })
-         .from(userTable)
-         .where(eq(userTable.email, email))
+         .from(users)
+         .where(eq(users.email, email))
          .limit(1);
 
       return user;
@@ -20,11 +20,11 @@ export const userService = {
    findByUsername: async (username: string) => {
       const [user] = await db
          .select({
-            id: userTable.id,
-            password: userTable.password,
+            id: users.id,
+            password: users.password,
          })
-         .from(userTable)
-         .where(eq(userTable.username, username))
+         .from(users)
+         .where(eq(users.username, username))
          .limit(1);
 
       return user;
@@ -33,14 +33,14 @@ export const userService = {
    findById: async (id: string) => {
       const [user] = await db
          .select({
-            name: userTable.name,
-            username: userTable.username,
-            email: userTable.email,
-            role: userTable.role,
-            createdAt: userTable.createdAt,
+            name: users.name,
+            username: users.username,
+            email: users.email,
+            role: users.role,
+            createdAt: users.createdAt,
          })
-         .from(userTable)
-         .where(eq(userTable.id, id))
+         .from(users)
+         .where(eq(users.id, id))
          .limit(1);
 
       return user;
@@ -48,15 +48,15 @@ export const userService = {
 
    // admin operations
    getAll: async () => {
-      const users = await db
+      const allUsers = await db
          .select({
-            id: userTable.id,
-            name: userTable.name,
-            email: userTable.email,
+            id: users.id,
+            name: users.name,
+            email: users.email,
          })
-         .from(userTable)
-         .where(eq(userTable.role, "user"));
-      return users;
+         .from(users)
+         .where(eq(users.role, "user"));
+      return allUsers;
    },
 
    create: async (name: string, username: string, email: string, password: string) => {
@@ -64,7 +64,7 @@ export const userService = {
       const hashedPassword = await hash(password, salt);
 
       const [user] = await db
-         .insert(userTable)
+         .insert(users)
          .values({
             name,
             username,
@@ -72,9 +72,9 @@ export const userService = {
             password: hashedPassword,
          })
          .returning({
-            id: userTable.id,
-            name: userTable.name,
-            email: userTable.email,
+            id: users.id,
+            name: users.name,
+            email: users.email,
          });
 
       return user;
@@ -82,19 +82,16 @@ export const userService = {
 
    delete: async (id: string) => {
       const [user] = await db
-         .delete(userTable)
-         .where(eq(userTable.id, id))
-         .returning({ name: userTable.name });
+         .delete(users)
+         .where(eq(users.id, id))
+         .returning({ name: users.name });
 
       return user;
    },
 
    // public operations
    getUser: async (username: string) => {
-      const [user] = await db
-         .select()
-         .from(userTable)
-         .where(eq(userTable.username, username));
+      const [user] = await db.select().from(users).where(eq(users.username, username));
 
       return user;
    },
