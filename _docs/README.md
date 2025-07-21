@@ -31,7 +31,7 @@ cd arq-gallery
 
 2. #### Install dependencies:
 
-```
+```shell
 # Frontend
 cd client && npm run install
 
@@ -41,7 +41,7 @@ cd ../server && npm run install
 
 3. #### Configure env variables:
 
-```
+```shell
 # Frontend
 # Create a `.env` file in the /client directory with the following:
 VITE_SERVER_URL=http://localhost:3000
@@ -60,7 +60,7 @@ NODE_ENV=development
 
 4. #### Database setup:
 
-```
+```shell
 # The schema is managed with Drizzle ORM. To push the schema:
 cd server
 npm run db:generate
@@ -70,7 +70,7 @@ npm run db:seed # Optional
 
 5. #### Run server:
 
-```
+```shell
 # Frontend
 cd client && npm run dev
 
