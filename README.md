@@ -2,13 +2,13 @@
 
 Official website for **Arq Gallery**
 
-> [Visit Live Website](https://arq-gallery.com)
+> [Visit Live Website](https://arq-gallery.vercel.app)
 
 ## Features
 
-- Pending...
-- Pending...
-- Pending...
+- Public Gallery: View apprentice profiles and posts without logging in.
+- Apprentice Access: Apprentices can log in to upload images and publish content.
+- Admin Dashboard: SENA admins manage accounts, create categories and oversee data.
 
 ## Documentation
 
