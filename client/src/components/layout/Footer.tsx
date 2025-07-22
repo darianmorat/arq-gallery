@@ -6,8 +6,8 @@ export const Footer = () => {
 
    return (
       <footer className="border-t mt-5 bg-zinc-100 dark:bg-zinc-900">
-         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-            <div className="sm:flex sm:items-center sm:justify-between">
+         <div className="w-full max-w-screen-xl mx-auto p-4">
+            <div className="flex flex-col items-center gap-4 p-4 sm:items-center sm:justify-between sm:flex-row">
                <a
                   href="#"
                   onClick={() => navigate("/")}
@@ -45,7 +45,7 @@ export const Footer = () => {
                   </li>
                </ul>
             </div>
-            <Separator className="my-8" />
+            <Separator className="mb-8 mt-4" />
             <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
                © 2025{" "}
                <a href="https://flowbite.com/" className="hover:underline">

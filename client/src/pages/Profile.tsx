@@ -13,7 +13,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 // IGNORE THAT SPECIFIC PROFILE ALONE
 
 export const Profile = () => {
-   const { isLoading, userProfile, userNotFound, getUser } = usePublicStore();
+   const { isLoading, userProfile, notFound, getUser } = usePublicStore();
    const { user, logout } = useAuthStore();
    const { username } = useParams();
 
@@ -40,13 +40,12 @@ export const Profile = () => {
       );
    }
 
-   if (userNotFound) {
+   if (notFound) {
       return <Navigate to="/404" />;
    }
 
    return (
       <LayoutContainer size="medium">
-         {/* Header */}
          {isMyProfile ? (
             <div className="mb-8">
                <h1 className="text-3xl font-bold mb-2">Mi perfil</h1>
@@ -62,9 +61,7 @@ export const Profile = () => {
             </div>
          )}
 
-         {/* Profile Card */}
          <div className="bg-accent/50 rounded-lg shadow-sm p-6 mb-6">
-            {/* Avatar Section */}
             <div className="flex items-center mb-6">
                <div className="w-16 h-16 bg-blue-200/80 rounded-full flex items-center justify-center">
                   <Avatar className="cursor-pointer pb-1">
@@ -80,7 +77,6 @@ export const Profile = () => {
                </div>
             </div>
 
-            {/* Profile Information */}
             <div className="space-y-4">
                <div className="flex items-center p-3 border bg-accent/50 rounded-lg">
                   <User className="w-5 h-5 text-muted-foreground mr-3" />
@@ -108,7 +104,6 @@ export const Profile = () => {
             </div>
          </div>
 
-         {/* Actions */}
          {isMyProfile && (
             <div className="flex justify-end space-x-3">
                <Button variant="outline">

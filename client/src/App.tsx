@@ -12,6 +12,7 @@ import { Profile } from "./pages/Profile";
 import { Create } from "./pages/Create";
 import { LoadingSpinner } from "./components/ui/LoadingSpinner";
 import { NotFound } from "./pages/NotFound";
+import { Post } from "./pages/Post";
 
 function App() {
    const { isAuth, checkingAuth, checkAuth } = useAuthStore();
@@ -39,6 +40,7 @@ function App() {
                   path="/create"
                   element={isAuth ? <Create /> : <Navigate to={"/"} />}
                />
+               <Route path="/post/:post" element={<Post />} />
             </Route>
             <Route element={<Minimal />}>
                <Route

@@ -2,9 +2,11 @@ import { create } from "zustand";
 import { toast } from "react-toastify";
 import api from "@/api/axios";
 
-type Image = {
+type Post = {
    id: string;
    mediaUrl: string;
+   title: string;
+   publicId: string;
 };
 
 type Values = {
@@ -15,21 +17,21 @@ type Values = {
 
 type Store = {
    isLoading: boolean;
-   images: Image[];
-   getImages: () => Promise<void>;
+   posts: Post[];
+   getPosts: () => Promise<void>;
    uploadPost: (files: File[], formValues: Values) => Promise<boolean | void>;
 };
 
 export const usePostStore = create<Store>((set, _get) => ({
    isLoading: false,
-   images: [],
+   posts: [],
 
-   getImages: async () => {
+   getPosts: async () => {
       set({ isLoading: true });
       try {
          const res = await api.get("/post/get-all");
          if (res.data.success) {
-            set({ images: res.data.posts });
+            set({ posts: res.data.posts });
             // console.log(res.data.posts);
          }
       } catch (error) {

@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { posts } from "../db/schema";
 
@@ -7,10 +8,22 @@ export const postService = {
          .select({
             id: posts.id,
             mediaUrl: posts.mediaUrl,
+            title: posts.title,
+            publicId: posts.publicId,
          })
          .from(posts);
 
       return allPosts;
+   },
+
+   getByPublicId: async (publicId: string) => {
+      const [post] = await db
+         .select()
+         .from(posts)
+         .where(eq(posts.publicId, publicId))
+         .limit(1);
+
+      return post;
    },
 
    create: async (
