@@ -13,6 +13,11 @@ export const Home = () => {
 
    return (
       <LayoutContainer className="columns-2 md:columns-4 lg:columns-5 gap-4 space-y-4 min-h-screen">
+         {/* {Array(3) */}
+         {/*    .fill(images) */}
+         {/*    .flat() */}
+         {/*    .map((img, i) => ( */}
+
          {images.map((img, i) => (
             <div
                key={i}

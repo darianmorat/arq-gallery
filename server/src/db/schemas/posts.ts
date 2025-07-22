@@ -8,6 +8,8 @@ export const posts = pgTable("posts", {
       .primaryKey()
       .default(sql`gen_random_uuid()`),
    publicId: text("public_id").notNull().unique(),
+   title: text("title").notNull(),
+   description: text("description").notNull(),
    mediaUrl: text("media_url").notNull(),
    resourceType: text("resource_type").notNull(),
    authorId: uuid("author_id")

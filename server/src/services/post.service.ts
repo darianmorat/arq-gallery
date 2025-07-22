@@ -12,4 +12,37 @@ export const postService = {
 
       return allPosts;
    },
+
+   create: async (
+      public_id: string,
+      secure_url: string,
+      resource_type: string,
+      userId: string,
+      categoryId: string,
+      title: string,
+      description: string,
+   ) => {
+      const post = await db
+         .insert(posts)
+         .values({
+            publicId: public_id,
+            mediaUrl: secure_url,
+            resourceType: resource_type,
+            authorId: userId,
+            categoryId: categoryId,
+            title: title,
+            description: description,
+         })
+         .returning({
+            publicId: posts.publicId,
+            mediaUrl: posts.mediaUrl,
+            resourceType: posts.resourceType,
+            authorId: posts.authorId,
+            categoryId: posts.categoryId,
+            title: posts.title,
+            description: posts.description,
+         });
+
+      return post;
+   },
 };

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { userService } from "../services/user.service";
 import { categoryService } from "../services/category.service";
-import { categories } from "../db/schema";
 
 export const getUsers = async (_req: Request, res: Response) => {
    try {
