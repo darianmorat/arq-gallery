@@ -33,8 +33,8 @@ export const Profile = () => {
    if (isLoading) {
       return (
          <LayoutContainer>
-            <div className="flex items-center justify-center min-h-64">
-               <div className="text-gray-500">Cargando...</div>
+            <div className="flex items-center justify-center h-screen mt-[-50px]">
+               <div className="text-gray-500">Cargando perfil...</div>
             </div>
          </LayoutContainer>
       );
@@ -45,40 +45,57 @@ export const Profile = () => {
    }
 
    return (
-      <LayoutContainer size="medium">
-         {isMyProfile ? (
+      <LayoutContainer size="medium" className="my-4">
+         {isMyProfile && (
             <div className="mb-8">
                <h1 className="text-3xl font-bold mb-2">Mi perfil</h1>
                <p className="text-muted-foreground">Gestiona tu información personal</p>
             </div>
-         ) : (
-            <div className="mb-8">
-               <h1 className="text-3xl font-bold mb-2">Perfil</h1>
-               <p className="text-muted-foreground">
-                  Puedes colaborar con donaciones a los aprendices:
-               </p>
-               <Button className="my-4">Donaciones aqui</Button>
-            </div>
          )}
+         <div className="rounded-lg border p-6 flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+               <div className="flex items-center">
+                  <div className="w-16 h-16 bg-blue-200/80 rounded-full flex items-center justify-center">
+                     <Avatar className="cursor-pointer pb-1">
+                        <AvatarImage src="" />
+                        <AvatarFallback className="text-4xl text-blue-600">
+                           {shortUserName}
+                        </AvatarFallback>
+                     </Avatar>
+                  </div>
+                  <div className="ml-4">
+                     <h2 className="text-xl font-semibold ">{userProfile?.name}</h2>
+                     <p className="text-muted-foreground">Usuario activo</p>
+                  </div>
+               </div>
 
-         <div className="bg-accent/50 rounded-lg shadow-sm p-6 mb-6">
-            <div className="flex items-center mb-6">
-               <div className="w-16 h-16 bg-blue-200/80 rounded-full flex items-center justify-center">
-                  <Avatar className="cursor-pointer pb-1">
-                     <AvatarImage src="" />
-                     <AvatarFallback className="text-4xl text-blue-600">
-                        {shortUserName}
-                     </AvatarFallback>
-                  </Avatar>
-               </div>
-               <div className="ml-4">
-                  <h2 className="text-xl font-semibold ">{userProfile?.name}</h2>
-                  <p className="text-muted-foreground">Usuario activo</p>
-               </div>
+               {isMyProfile ? (
+                  <div className="flex justify-end space-x-3">
+                     <Button variant="outline">
+                        <User className="w-4 h-4 mr-2" />
+                        Editar perfil
+                     </Button>
+                     <Button
+                        variant="outline"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        onClick={() => {
+                           navigate("/");
+                           logout();
+                        }}
+                     >
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Cerrar sesión
+                     </Button>
+                  </div>
+               ) : (
+                  <Button variant={"outline"} className="my-4">
+                     Donaciones aqui
+                  </Button>
+               )}
             </div>
 
             <div className="space-y-4">
-               <div className="flex items-center p-3 border bg-accent/50 rounded-lg">
+               <div className="flex items-center p-3 border bg-accent/30 rounded-lg">
                   <User className="w-5 h-5 text-muted-foreground mr-3" />
                   <div>
                      <label className="text-sm font-medium">Nombre completo</label>
@@ -86,7 +103,7 @@ export const Profile = () => {
                   </div>
                </div>
 
-               <div className="flex items-center p-3 border bg-accent/50 rounded-lg">
+               <div className="flex items-center p-3 border bg-accent/30 rounded-lg">
                   <Mail className="w-5 h-5 text-muted-foreground mr-3" />
                   <div>
                      <label className="text-sm font-medium">Correo electrónico</label>
@@ -94,7 +111,7 @@ export const Profile = () => {
                   </div>
                </div>
 
-               <div className="flex items-center p-3 border bg-accent/50 rounded-lg">
+               <div className="flex items-center p-3 border bg-accent/30 rounded-lg">
                   <Calendar className="w-5 h-5 text-muted-foreground mr-3" />
                   <div>
                      <label className="text-sm font-medium">Miembro desde</label>
@@ -103,26 +120,6 @@ export const Profile = () => {
                </div>
             </div>
          </div>
-
-         {isMyProfile && (
-            <div className="flex justify-end space-x-3">
-               <Button variant="outline">
-                  <User className="w-4 h-4 mr-2" />
-                  Editar perfil
-               </Button>
-               <Button
-                  variant="outline"
-                  className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                  onClick={() => {
-                     navigate("/");
-                     logout();
-                  }}
-               >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Cerrar sesión
-               </Button>
-            </div>
-         )}
       </LayoutContainer>
    );
 };

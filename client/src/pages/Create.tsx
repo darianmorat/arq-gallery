@@ -8,7 +8,7 @@ import { PostForm } from "@/components/post/PostForm";
 
 export const Create = () => {
    return (
-      <LayoutContainer size="medium">
+      <LayoutContainer size="medium" className="my-4">
          <div className="mb-5">
             <h1 className="text-3xl font-bold mb-2">Crear Publicación</h1>
             <p className="text-muted-foreground">Comparte tu trabajo con la comunidad</p>

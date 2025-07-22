@@ -25,8 +25,8 @@ export const Post = () => {
    if (isLoading) {
       return (
          <LayoutContainer>
-            <div className="flex items-center justify-center min-h-64">
-               <div className="text-gray-500">Cargando...</div>
+            <div className="flex items-center justify-center h-screen mt-[-50px]">
+               <div className="text-gray-500">Cargando post...</div>
             </div>
          </LayoutContainer>
       );
