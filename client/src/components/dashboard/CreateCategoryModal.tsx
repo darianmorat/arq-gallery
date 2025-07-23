@@ -63,9 +63,9 @@ export const CreateCategoryModal = ({ handleModal }: CreateCategoryModalProps) =
          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
                <div className="relative bg-background dark:bg-accent p-6 rounded-lg m-4 w-full max-w-100">
-                  <h1 className="text-2xl font-bold">Crear categoria</h1>
+                  <h1 className="text-2xl font-bold">Crear categoría</h1>
                   <p className="text-muted-foreground text-sm">
-                     Completa la información para crear una nueva categoria
+                     Completa la información para crear una nueva categoría
                   </p>
                   <Button
                      type="button"

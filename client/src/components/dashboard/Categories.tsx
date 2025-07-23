@@ -41,7 +41,7 @@ export const Categories = () => {
                {/* </div> */}
             </div>
             <Button onClick={() => handleModal("create")}>
-               <Plus /> Crear categoria
+               <Plus /> Crear categoría
             </Button>
          </div>
          <Separator className="my-8" />
@@ -49,7 +49,7 @@ export const Categories = () => {
             <table className="min-w-full text-left">
                <thead className="bg-accent uppercase text-xs">
                   <tr>
-                     <th className="px-6 py-3 min-w-fit">Categoria</th>
+                     <th className="px-6 py-3 min-w-fit">Categoría</th>
                      <th className="px-6 py-3 min-w-fit">Tag</th>
                      <th className="px-6 py-3 min-w-65 text-right">Acciones</th>
                   </tr>

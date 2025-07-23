@@ -22,9 +22,9 @@ export const DeleteCategoryModal = ({
    return (
       <Modal>
          <div className="relative bg-background dark:bg-accent p-6 rounded-lg m-4 w-full max-w-100 flex flex-col gap-2">
-            <h1 className="text-2xl font-bold">Eliminar categoria</h1>
+            <h1 className="text-2xl font-bold">Eliminar categoría</h1>
             <p className="text-muted-foreground text-sm">
-               Confirma que quiere eliminar la categoria{" "}
+               Confirma que quiere eliminar la categoría{" "}
                <span className="font-bold">{category.tag}</span>?
             </p>
             <Button

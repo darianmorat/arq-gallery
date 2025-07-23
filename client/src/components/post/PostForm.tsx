@@ -42,7 +42,7 @@ const formSchema = z.object({
       .min(10, { message: "Mínimo 10 caracteres" })
       .max(300, { message: "Máximo 300 caracteres" }),
    category: z.string({
-      required_error: "Selecciona una categoria",
+      required_error: "Selecciona una categoría",
    }),
 });
 
@@ -114,7 +114,7 @@ export const PostForm = () => {
                         name="category"
                         render={({ field }) => (
                            <FormItem>
-                              <FormLabel>Categoria</FormLabel>
+                              <FormLabel>Categoría</FormLabel>
                               <Select
                                  onValueChange={field.onChange}
                                  defaultValue={field.value}

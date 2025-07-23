@@ -21,8 +21,9 @@ export const DeleteUserModal = ({ handleModal, user }: DeleteUserModalProps) => 
          <div className="relative bg-background dark:bg-accent p-6 rounded-lg m-4 w-full max-w-100 flex flex-col gap-2">
             <h1 className="text-2xl font-bold">Eliminar usuario</h1>
             <p className="text-muted-foreground text-sm">
-               Confirma que quiere eleminar el usuario{" "}
-               <span className="font-bold">{user.name}</span>?
+               Confirma que quiere eliminar el usuario{" "}
+               <span className="font-bold">{user.name}</span> y todas sus{" "}
+               <span className="font-bold">publicaciones</span>?
             </p>
             <Button
                type="button"
