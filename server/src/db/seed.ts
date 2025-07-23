@@ -7,9 +7,6 @@ const main = async () => {
       console.log("Seeding users...");
       await seedUsers();
 
-      // console.log("Seeding products...");
-      // await seedProducts()
-
       console.log("Seeding completed");
    } catch (error) {
       console.error("Error during seeding:", error);
