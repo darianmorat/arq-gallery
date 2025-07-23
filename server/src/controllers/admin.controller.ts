@@ -20,7 +20,7 @@ export const getUsers = async (_req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
    try {
-      const { name, username, email, password } = req.body;
+      const { name, username, phone, email, password } = req.body;
       const emailUsed = await userService.findByEmail(email);
       const usernameUsed = await userService.findByUsername(username);
 
@@ -40,7 +40,7 @@ export const createUser = async (req: Request, res: Response) => {
          return;
       }
 
-      const newUser = await userService.create(name, username, email, password);
+      const newUser = await userService.create(name, username, phone, email, password);
 
       res.status(200).json({
          success: true,

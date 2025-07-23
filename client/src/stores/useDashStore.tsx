@@ -23,6 +23,7 @@ type Store = {
    createUser: (
       name: string,
       username: string,
+      phone: string,
       email: string,
       password: string,
    ) => Promise<void>;
@@ -51,12 +52,13 @@ export const useDashStore = create<Store>((set, get) => ({
       }
    },
 
-   createUser: async (name, username, email, password) => {
+   createUser: async (name, username, phone, email, password) => {
       set({ isLoading: true });
       try {
          const body = {
             name: name,
             username: username,
+            phone: phone,
             email: email,
             password: password,
          };

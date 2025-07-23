@@ -17,11 +17,13 @@ export const postService = {
    },
 
    getByPublicId: async (publicId: string) => {
-      const [post] = await db
-         .select()
-         .from(posts)
-         .where(eq(posts.publicId, publicId))
-         .limit(1);
+      const post = await db.query.posts.findFirst({
+         where: eq(posts.publicId, publicId),
+         with: {
+            author: true,
+            category: true,
+         },
+      });
 
       return post;
    },

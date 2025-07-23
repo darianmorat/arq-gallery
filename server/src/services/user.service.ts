@@ -59,7 +59,13 @@ export const userService = {
       return allUsers;
    },
 
-   create: async (name: string, username: string, email: string, password: string) => {
+   create: async (
+      name: string,
+      username: string,
+      phone: string,
+      email: string,
+      password: string,
+   ) => {
       const salt = await genSalt(10);
       const hashedPassword = await hash(password, salt);
 
@@ -68,6 +74,7 @@ export const userService = {
          .values({
             name,
             username,
+            phone,
             email,
             password: hashedPassword,
          })

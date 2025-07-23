@@ -4,6 +4,9 @@ import { Heart } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// PENDING:
+// ADD PAGINATION TO THE WEBSITE, SO WHEN MANY IMAGES ARE UPLOADED WE CAN HANDLE THEM
+
 export const Home = () => {
    const { getPosts, posts } = usePostStore();
    const navigate = useNavigate();

@@ -17,6 +17,10 @@ export const Profile = () => {
    const { user, logout } = useAuthStore();
    const { username } = useParams();
 
+   const phone = userProfile?.phone;
+   const message = "Hola, me gustaría apoyarte con una donación!";
+   const url = `https://wa.me/57${phone}?text=${encodeURIComponent(message)}`;
+
    const createdAt = useFormatDate(userProfile?.createdAt);
    const shortUserName = userProfile?.name.slice(0, 1);
    const isMyProfile = user?.username === username;
@@ -88,7 +92,11 @@ export const Profile = () => {
                      </Button>
                   </div>
                ) : (
-                  <Button variant={"outline"} className="my-4">
+                  <Button
+                     variant={"outline"}
+                     className="my-4"
+                     onClick={() => window.open(url, "_blank")}
+                  >
                      Donaciones aqui
                   </Button>
                )}
@@ -100,6 +108,14 @@ export const Profile = () => {
                   <div>
                      <label className="text-sm font-medium">Nombre completo</label>
                      <p className="text-muted-foreground">{userProfile?.name}</p>
+                  </div>
+               </div>
+
+               <div className="flex items-center p-3 border bg-accent/30 rounded-lg">
+                  <Mail className="w-5 h-5 text-muted-foreground mr-3" />
+                  <div>
+                     <label className="text-sm font-medium">Número celular</label>
+                     <p className="text-muted-foreground">#{userProfile?.phone}</p>
                   </div>
                </div>
 

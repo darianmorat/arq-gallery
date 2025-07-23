@@ -4,6 +4,7 @@ import api from "@/api/axios";
 type User = {
    id: string;
    name: string;
+   phone: string;
    email: string;
    role: "admin" | "user";
    createdAt: string;
@@ -13,8 +14,16 @@ type Post = {
    id: string;
    title: string;
    description: string;
-   categoryId: string;
-   authorId: string;
+   author: {
+      name: string;
+      username: string;
+      phone: string;
+   };
+   category: {
+      title: string;
+      description: string;
+      tag: string;
+   };
    mediaUrl: string;
    createdAt: string;
 };

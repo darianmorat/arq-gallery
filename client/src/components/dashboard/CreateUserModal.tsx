@@ -11,7 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
-import { User, Mail, Lock, X, Eye, EyeOff, AtSign } from "lucide-react";
+import { User, Mail, Lock, X, Eye, EyeOff, AtSign, Phone } from "lucide-react";
 import { useState } from "react";
 import { useDashStore } from "@/stores/useDashStore";
 import { Modal } from "./Modal";
@@ -35,6 +35,12 @@ const formSchema = z.object({
       .min(4, { message: "Mínimo 4 caracteres" })
       .max(30, { message: "Máximo 30 caracteres" }),
 
+   phone: z
+      .string()
+      .min(10, { message: "Teléfono inválido" })
+      .max(10, { message: "Máximo 10 caracteres" })
+      .regex(/^\+?[0-9\s-]+$/, { message: "Formato de teléfono inválido" }),
+
    email: z
       .string()
       .email({ message: "Email inválido" })
@@ -55,13 +61,20 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
       defaultValues: {
          name: "",
          username: "",
+         phone: "",
          email: "",
          password: "",
       },
    });
 
    function onSubmit(values: z.infer<typeof formSchema>) {
-      createUser(values.name, values.username, values.email, values.password);
+      createUser(
+         values.name,
+         values.username,
+         values.phone,
+         values.email,
+         values.password,
+      );
       handleModal("");
       form.reset();
    }
@@ -136,6 +149,31 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
                            </FormItem>
                         )}
                      />
+                     <FormField
+                        control={form.control}
+                        name="phone"
+                        // disabled={isLoading}
+                        render={({ field }) => (
+                           <FormItem>
+                              <FormLabel>Teléfono</FormLabel>
+                              <FormControl>
+                                 <div className="relative">
+                                    <Phone
+                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                       size={18}
+                                    />
+                                    <Input
+                                       placeholder="111-111-111"
+                                       {...field}
+                                       className="pl-10"
+                                    />
+                                 </div>
+                              </FormControl>
+                              <FormMessage />
+                           </FormItem>
+                        )}
+                     />
+
                      <FormField
                         control={form.control}
                         name="email"
