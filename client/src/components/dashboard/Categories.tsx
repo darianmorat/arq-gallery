@@ -30,13 +30,15 @@ export const Categories = () => {
          <div className="flex gap-4 justify-between items-center">
             <div className="flex gap-8">
                <div>
-                  <p className="text-3xl font-bold">{categories.length}</p>
+                  <p className="text-3xl font-bold">
+                     {categories.length.toString().padStart(2, "0")}
+                  </p>
                   <h1>Total categorias</h1>
                </div>
-               <div>
-                  <p className="text-3xl font-bold">0</p>
-                  <h1>Categorias activas</h1>
-               </div>
+               {/* <div> */}
+               {/*    <p className="text-3xl font-bold">0</p> */}
+               {/*    <h1>Categorias activas</h1> */}
+               {/* </div> */}
             </div>
             <Button onClick={() => handleModal("create")}>
                <Plus /> Crear categoria

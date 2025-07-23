@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { CreateUserModal } from "./CreateUserModal";
 import { useDashStore } from "@/stores/useDashStore";
 import { DeleteUserModal } from "./DeleteUserModal";
+import { useNavigate } from "react-router-dom";
 
 // PENDING:
 // DINAMIC POSTS FOR THE APPRENTICES IN THE TABLE
@@ -20,6 +21,9 @@ export const Apprentices = () => {
    const [selectedUser, setSelectedUser] = useState<User | null>(null);
    const { users = [], getUsers } = useDashStore();
 
+   const navigate = useNavigate();
+   const totalPosts = users.reduce((sum, user) => sum + user.posts.length, 0);
+
    const handleModal = (modal: string): void => {
       setShowModal((prev) => ({ active: !prev.active, for: modal }));
    };
@@ -34,11 +38,15 @@ export const Apprentices = () => {
          <div className="flex gap-4 justify-between items-center">
             <div className="flex gap-8">
                <div>
-                  <p className="text-3xl font-bold">{users.length}</p>
+                  <p className="text-3xl font-bold">
+                     {users.length.toString().padStart(2, "0")}
+                  </p>
                   <h1>Total usuarios</h1>
                </div>
                <div>
-                  <p className="text-3xl font-bold">0</p>
+                  <p className="text-3xl font-bold">
+                     {totalPosts.toString().padStart(2, "0")}
+                  </p>
                   <h1>Total posts</h1>
                </div>
             </div>
@@ -74,12 +82,15 @@ export const Apprentices = () => {
                         </td>
                         <td className="px-6 py-6 flex items-center gap-2">
                            <span className="bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-200 text-sm font-medium px-2.5 py-2 rounded">
-                              0
+                              {user.posts.length.toString().padStart(2, "0")}
                            </span>
                            posts
                         </td>
                         <td className="px-6 py-4 text-right space-x-2">
-                           <Button variant="outline">
+                           <Button
+                              variant="outline"
+                              onClick={() => navigate(`/${user.username}`)}
+                           >
                               <Eye /> Ver perfil
                            </Button>
                            <Button variant="outline">
