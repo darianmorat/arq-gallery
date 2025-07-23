@@ -15,6 +15,20 @@
       "when": 1753069983592,
       "tag": "0001_peaceful_joshua_kane",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1753284267718,
+      "tag": "0002_gifted_nico_minoru",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1753284503820,
+      "tag": "0003_wandering_omega_flight",
+      "breakpoints": true
     }
   ]
 }

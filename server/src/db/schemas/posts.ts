@@ -1,4 +1,4 @@
-import { uuid, timestamp, pgTable, text } from "drizzle-orm/pg-core";
+import { uuid, timestamp, pgTable, text, varchar } from "drizzle-orm/pg-core";
 import { sql, relations } from "drizzle-orm";
 import { users } from "./users";
 import { categories } from "./categories";
@@ -8,7 +8,7 @@ export const posts = pgTable("posts", {
       .primaryKey()
       .default(sql`gen_random_uuid()`),
    publicId: text("public_id").notNull().unique(),
-   title: text("title").notNull(),
+   title: varchar("title", { length: 50 }).notNull(),
    description: text("description").notNull(),
    mediaUrl: text("media_url").notNull(),
    resourceType: text("resource_type").notNull(),

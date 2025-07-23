@@ -25,10 +25,25 @@ type CreateUserModalProps = {
 };
 
 const formSchema = z.object({
-   name: z.string().min(4, { message: "Minimo 4 caracteres" }),
-   username: z.string().min(4, { message: "Minimo 4 caracteres" }),
-   email: z.string().email({ message: "Email invalido" }),
-   password: z.string().min(1, { message: "Contraseña invalida" }),
+   name: z
+      .string()
+      .min(4, { message: "Mínimo 4 caracteres" })
+      .max(50, { message: "Máximo 50 caracteres" }),
+
+   username: z
+      .string()
+      .min(4, { message: "Mínimo 4 caracteres" })
+      .max(30, { message: "Máximo 30 caracteres" }),
+
+   email: z
+      .string()
+      .email({ message: "Email inválido" })
+      .max(255, { message: "Máximo 255 caracteres" }),
+
+   password: z
+      .string()
+      .min(1, { message: "Contraseña inválida" })
+      .max(60, { message: "Máximo 60 caracteres" }),
 });
 
 export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {

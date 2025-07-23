@@ -32,15 +32,12 @@ const formSchema = z.object({
    tag: z
       .string()
       .min(4, { message: "Mínimo 4 caracteres" })
-      .max(50, { message: "Máximo 50 caracteres" })
+      .max(100, { message: "Máximo 50 caracteres" })
       .regex(/^[a-zA-Z0-9-_]+$/, {
          message: "Solo letras, números, guiones y guiones bajos",
       })
       .transform((val) => val.toLowerCase()),
-   description: z
-      .string()
-      .min(10, { message: "Mínimo 10 caracteres" })
-      .max(300, { message: "Máximo 300 caracteres" }),
+   description: z.string().min(10, { message: "Mínimo 10 caracteres" }),
 });
 
 export const CreateCategoryModal = ({ handleModal }: CreateCategoryModalProps) => {
