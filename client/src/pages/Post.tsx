@@ -1,9 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { LayoutContainer } from "@/components/layout/Container";
-import { User, Calendar, Heart, Share2, Download, DollarSign, Tag } from "lucide-react";
+import {
+   User,
+   Calendar,
+   Heart,
+   Share2,
+   Download,
+   DollarSign,
+   Tag,
+   Fullscreen,
+} from "lucide-react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { usePublicStore } from "@/stores/usePublicStore";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useFormatDate } from "@/hooks/useFormatDate";
 
@@ -20,6 +29,7 @@ export const Post = () => {
 
    const isMyPost = user?.username === postProfile?.author.username;
    const createdAt = useFormatDate(postProfile?.createdAt);
+   const imageRef = useRef<HTMLImageElement>(null);
 
    useEffect(() => {
       if (post) {
@@ -42,14 +52,28 @@ export const Post = () => {
       return <Navigate to="/404" />;
    }
 
+   const handleFullscreen = () => {
+      const img = imageRef.current;
+
+      if (img?.requestFullscreen) {
+         img.requestFullscreen();
+      }
+   };
+
    return (
       <LayoutContainer size="medium">
          <div className="dark:bg-accent/80 rounded-xl shadow overflow-hidden border">
-            <div className="relative flex justify-center bg-black dark:bg-background">
+            <div className="relative flex justify-center bg-black dark:bg-background group">
                <img
+                  ref={imageRef}
                   src={postProfile?.mediaUrl}
                   alt={postProfile?.title}
                   className="max-w-full h-auto max-h-[450px] object-contain"
+               />
+               <Fullscreen
+                  size={35}
+                  onClick={handleFullscreen}
+                  className="absolute bottom-2 right-2 opacity-0 bg-black/30 hover:bg-black/40 rounded-md p-1 group-hover:opacity-100 transition-opacity text-white cursor-pointer"
                />
             </div>
             <div className="p-8">
