@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { LayoutContainer } from "@/components/layout/Container";
 import { useFormatDate } from "@/hooks/useFormatDate";
-import { User, Mail, Calendar, LogOut } from "lucide-react";
+import { User, Mail, Calendar, LogOut, Heart } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { usePublicStore } from "@/stores/usePublicStore";
 import { useEffect } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { usePostStore } from "@/stores/usePostStore";
 
 // PENDING:
 // HOW TO HANDLE THE ADMIN PROFILE, CAUSE HE SHOULD NOT GET ANY DONATION, SO WE SHOULD
@@ -14,6 +15,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 
 export const Profile = () => {
    const { isLoading, userProfile, notFound, getUser } = usePublicStore();
+   const { posts, getUserPosts } = usePostStore();
    const { user, logout } = useAuthStore();
    const { username } = useParams();
 
@@ -30,6 +32,7 @@ export const Profile = () => {
    useEffect(() => {
       if (username) {
          getUser(username);
+         getUserPosts(username);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [username]);
@@ -135,6 +138,39 @@ export const Profile = () => {
                   </div>
                </div>
             </div>
+         </div>
+         <div className="rounded-lg py-6 flex flex-col gap-4 mt-4">
+            <h2 className="text-2xl font-semibold">Publicaciones ({posts.length})</h2>
+            {posts.length <= 0 ? (
+               <p>Opps! Parece que no hay nada para mostrar</p>
+            ) : (
+               <LayoutContainer className="columns-2 p-0 md:columns-3 lg:columns-4 gap-4 space-y-4 min-h-screen">
+                  {posts.map((post, i) => (
+                     <div
+                        key={i}
+                        className="group relative overflow-hidden rounded-lg cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+                        onClick={() => navigate(`/post/${post.publicId}`)}
+                     >
+                        <img
+                           className="w-full rounded-lg transition-all duration-200 group-hover:brightness-85"
+                           src={post.mediaUrl}
+                           alt={post.title}
+                        />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg [background:radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.2)_70%,rgba(0,0,0,0.5)_100%)]" />
+
+                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                           <button className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-lg shadow-lg backdrop-blur-sm">
+                              <Heart className="w-4 h-4" />
+                           </button>
+                        </div>
+
+                        <div className="absolute bottom-0 left-0 p-2 bg-black/50 w-full text-white font-bold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                           {post.title}
+                        </div>
+                     </div>
+                  ))}
+               </LayoutContainer>
+            )}
          </div>
       </LayoutContainer>
    );

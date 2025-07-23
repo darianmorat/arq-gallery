@@ -18,7 +18,7 @@ export const Post = () => {
    const message = "Hola, me gustaría apoyarte con una donación!";
    const url = `https://wa.me/57${phone}?text=${encodeURIComponent(message)}`;
 
-   const isMyPost = user?.username === post;
+   const isMyPost = user?.username === postProfile?.author.username;
    const createdAt = useFormatDate(postProfile?.createdAt);
 
    useEffect(() => {
@@ -72,13 +72,13 @@ export const Post = () => {
                         className="text-gray-600 hover:text-blue-500 hover:bg-blue-50 p-2 rounded-lg cursor-pointer"
                      />
 
-                     <Download
-                        size={35}
-                        className="text-gray-600 hover:text-green-500 hover:bg-green-50 p-2 rounded-lg cursor-pointer"
-                     />
-
                      {!isMyPost && (
                         <>
+                           <Download
+                              size={35}
+                              className="text-gray-600 hover:text-green-500 hover:bg-green-50 p-2 rounded-lg cursor-pointer"
+                           />
+
                            <DollarSign
                               size={35}
                               className="text-gray-600 hover:text-yellow-500 hover:bg-yellow-50 p-2 rounded-lg cursor-pointer"

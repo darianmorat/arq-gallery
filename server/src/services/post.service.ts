@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
-import { posts } from "../db/schema";
+import { posts, users } from "../db/schema";
 
 export const postService = {
    getAll: async () => {
@@ -12,6 +12,17 @@ export const postService = {
             publicId: posts.publicId,
          })
          .from(posts);
+
+      return allPosts;
+   },
+
+   getAllUserPosts: async (username: string) => {
+      const allPosts = await db.query.users.findFirst({
+         where: eq(users.username, username),
+         with: {
+            posts: true,
+         },
+      });
 
       return allPosts;
    },

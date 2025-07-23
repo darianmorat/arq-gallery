@@ -49,7 +49,7 @@ export const logout = (_req: Request, res: Response) => {
 
       res.status(200).json({
          success: true,
-         message: "Session cerrada",
+         message: "Sesión cerrada",
       });
    } catch (error) {
       res.status(500).json({

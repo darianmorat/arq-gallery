@@ -19,6 +19,7 @@ type Store = {
    isLoading: boolean;
    posts: Post[];
    getPosts: () => Promise<void>;
+   getUserPosts: (username: string) => Promise<void>;
    uploadPost: (files: File[], formValues: Values) => Promise<boolean | void>;
 };
 
@@ -33,6 +34,21 @@ export const usePostStore = create<Store>((set, _get) => ({
          if (res.data.success) {
             set({ posts: res.data.posts });
             // console.log(res.data.posts);
+         }
+      } catch (error) {
+         toast.error(error.response.data.message);
+      } finally {
+         set({ isLoading: false });
+      }
+   },
+
+   getUserPosts: async (username) => {
+      set({ isLoading: true });
+      try {
+         const res = await api.get(`/post/get-all-user/${username}`);
+
+         if (res.data.success) {
+            set({ posts: res.data.posts });
          }
       } catch (error) {
          toast.error(error.response.data.message);

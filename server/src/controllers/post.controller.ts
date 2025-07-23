@@ -85,3 +85,20 @@ export const getAll = async (_req: Request, res: Response) => {
       });
    }
 };
+
+export const getAllUser = async (req: Request, res: Response) => {
+   try {
+      const { username } = req.params;
+      const result = await postService.getAllUserPosts(username);
+
+      res.status(200).json({
+         success: true,
+         posts: result?.posts,
+      });
+   } catch (error) {
+      res.status(500).json({
+         success: false,
+         message: "server error",
+      });
+   }
+};

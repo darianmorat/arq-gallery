@@ -57,7 +57,7 @@ export const useAuthStore = create<Store>((set, get) => ({
 
          if (res.data.success) {
             set({ isAuth: false, user: null });
-            toast.success(res.data.message);
+            toast.info(res.data.message);
          }
       } catch (_error) {
          toast.error("failed to logut");

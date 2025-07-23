@@ -5,7 +5,13 @@ import api from "@/api/axios";
 type User = {
    id: string;
    name: string;
+   username: string;
    email: string;
+   posts: Post[];
+};
+
+type Post = {
+   id: string;
 };
 
 type Category = {

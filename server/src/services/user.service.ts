@@ -48,14 +48,12 @@ export const userService = {
 
    // admin operations
    getAll: async () => {
-      const allUsers = await db
-         .select({
-            id: users.id,
-            name: users.name,
-            email: users.email,
-         })
-         .from(users)
-         .where(eq(users.role, "user"));
+      const allUsers = await db.query.users.findMany({
+         where: eq(users.role, "user"),
+         with: {
+            posts: true,
+         },
+      });
       return allUsers;
    },
 
