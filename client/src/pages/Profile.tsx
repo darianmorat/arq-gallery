@@ -140,7 +140,13 @@ export const Profile = () => {
             </div>
          </div>
          <div className="rounded-lg py-6 flex flex-col gap-4 mt-4">
-            <h2 className="text-2xl font-semibold">Publicaciones ({posts.length})</h2>
+            {isMyProfile ? (
+               <h2 className="text-2xl font-semibold">
+                  Mis publicaciones ({posts.length})
+               </h2>
+            ) : (
+               <h2 className="text-2xl font-semibold">Publicaciones ({posts.length})</h2>
+            )}
             {posts.length <= 0 ? (
                <p>Opps! Parece que no hay nada para mostrar</p>
             ) : (

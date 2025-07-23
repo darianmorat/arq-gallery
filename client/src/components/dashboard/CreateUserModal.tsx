@@ -33,7 +33,8 @@ const formSchema = z.object({
    username: z
       .string()
       .min(4, { message: "Mínimo 4 caracteres" })
-      .max(30, { message: "Máximo 30 caracteres" }),
+      .max(30, { message: "Máximo 30 caracteres" })
+      .transform((val) => val.toLowerCase()),
 
    phone: z
       .string()

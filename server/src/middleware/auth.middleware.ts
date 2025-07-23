@@ -13,7 +13,7 @@ export const privateRoute = (req: AuthRequest, res: Response, next: NextFunction
       if (!authCookie) {
          res.status(401).json({
             success: false,
-            message: "Missing cookie", // Acceso no autorizado
+            message: "Acceso no autorizado",
          });
          return;
       }
@@ -27,7 +27,7 @@ export const privateRoute = (req: AuthRequest, res: Response, next: NextFunction
 
       res.status(401).json({
          success: false,
-         message: "Invalid or expired token", // Acceso no autorizado
+         message: "Acceso no autorizado",
       });
    }
 };
