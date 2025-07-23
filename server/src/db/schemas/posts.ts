@@ -14,10 +14,11 @@ export const posts = pgTable("posts", {
    resourceType: text("resource_type").notNull(),
    authorId: uuid("author_id")
       .notNull()
-      .references(() => users.id),
-   categoryId: uuid("category_id")
-      .notNull()
-      .references(() => categories.id),
+      .references(() => users.id, { onDelete: "cascade" }),
+   categoryId: uuid("category_id").references(() => categories.id, {
+      onDelete: "set null",
+      onUpdate: "cascade",
+   }),
    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

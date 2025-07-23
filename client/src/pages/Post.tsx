@@ -135,15 +135,23 @@ export const Post = () => {
                <div className="flex bg-blue-50 dark:bg-blue-200/10 items-start gap-4 p-4 rounded-lg border border-blue-200 dark:border-blue-200/50">
                   <Tag className="w-5 h-5 mt-1 flex-shrink-0" />
                   <div className="flex-1">
-                     <p className="text-muted-foreground mb-2">
-                        #{postProfile?.category.tag}
-                     </p>
-                     <h3 className="text-lg font-semibold mb-1">
-                        {postProfile?.category.title}
-                     </h3>
-                     <p className="text-muted-foreground/70">
-                        {postProfile?.category.description}
-                     </p>
+                     {postProfile?.category ? (
+                        <>
+                           <p className="text-muted-foreground mb-2">
+                              #{postProfile?.category.tag}
+                           </p>
+                           <h3 className="text-lg font-semibold mb-1">
+                              {postProfile?.category.title}
+                           </h3>
+                           <p className="text-muted-foreground/70">
+                              {postProfile?.category.description}
+                           </p>
+                        </>
+                     ) : (
+                        <>
+                           <p className="text-muted-foreground">Sin categoría</p>
+                        </>
+                     )}
                   </div>
                </div>
             </div>

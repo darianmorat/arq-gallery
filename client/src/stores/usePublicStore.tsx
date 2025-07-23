@@ -23,7 +23,7 @@ type Post = {
       title: string;
       description: string;
       tag: string;
-   };
+   } | null;
    mediaUrl: string;
    createdAt: string;
 };
