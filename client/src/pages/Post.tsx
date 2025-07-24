@@ -18,6 +18,7 @@ import { useFormatDate } from "@/hooks/useFormatDate";
 
 export const Post = () => {
    const { isLoading, notFound, postProfile, getPost } = usePublicStore();
+   // const [showModal, setShowModal] = useState({ active: false, for: "" });
    const { user } = useAuthStore();
    const { post } = useParams();
 

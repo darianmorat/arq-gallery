@@ -85,175 +85,178 @@ export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
    };
 
    return (
-      <Modal>
+      <Modal orientation="right">
          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-               <div className="relative bg-background dark:bg-accent p-6 rounded-lg m-4 w-full max-w-100">
-                  <h1 className="text-2xl font-bold">Crear usuario</h1>
-                  <p className="text-muted-foreground text-sm">
-                     Completa la información para crear una nueva cuenta
-                  </p>
-                  <Button
-                     type="button"
-                     variant={"ghost"}
-                     className="absolute right-2 top-2 text-muted-foreground"
-                     onClick={() => handleModal("")}
-                  >
-                     <X />
-                  </Button>
-                  <div className="grid gap-4 pt-5">
-                     <FormField
-                        control={form.control}
-                        name="name"
-                        // disabled={isLoading}
-                        render={({ field }) => (
-                           <FormItem>
-                              <FormLabel>Nombre</FormLabel>
-                              <FormControl>
-                                 <div className="relative">
-                                    <User
-                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                                       size={18}
-                                    />
-                                    <Input
-                                       placeholder="Jhon Smith"
-                                       {...field}
-                                       className="pl-10"
-                                    />
-                                 </div>
-                              </FormControl>
-                              <FormMessage />
-                           </FormItem>
-                        )}
-                     />
-                     <FormField
-                        control={form.control}
-                        name="username"
-                        // disabled={isLoading}
-                        render={({ field }) => (
-                           <FormItem>
-                              <FormLabel>Usuario</FormLabel>
-                              <FormControl>
-                                 <div className="relative">
-                                    <AtSign
-                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                                       size={18}
-                                    />
-                                    <Input
-                                       placeholder="jhon06_"
-                                       {...field}
-                                       className="pl-10"
-                                    />
-                                 </div>
-                              </FormControl>
-                              <FormMessage />
-                           </FormItem>
-                        )}
-                     />
-                     <FormField
-                        control={form.control}
-                        name="phone"
-                        // disabled={isLoading}
-                        render={({ field }) => (
-                           <FormItem>
-                              <FormLabel>Teléfono</FormLabel>
-                              <FormControl>
-                                 <div className="relative">
-                                    <Phone
-                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                                       size={18}
-                                    />
-                                    <Input
-                                       placeholder="111-111-111"
-                                       {...field}
-                                       className="pl-10"
-                                    />
-                                 </div>
-                              </FormControl>
-                              <FormMessage />
-                           </FormItem>
-                        )}
-                     />
-
-                     <FormField
-                        control={form.control}
-                        name="email"
-                        // disabled={isLoading}
-                        render={({ field }) => (
-                           <FormItem>
-                              <FormLabel>Correo</FormLabel>
-                              <FormControl>
-                                 <div className="relative">
-                                    <Mail
-                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                                       size={18}
-                                    />
-                                    <Input
-                                       placeholder="jhon@gmail.com"
-                                       {...field}
-                                       className="pl-10"
-                                    />
-                                 </div>
-                              </FormControl>
-                              <FormMessage />
-                           </FormItem>
-                        )}
-                     />
-                     <FormField
-                        control={form.control}
-                        name="password"
-                        // disabled={isLoading}
-                        render={({ field }) => (
-                           <FormItem>
-                              <FormLabel>Contraseña</FormLabel>
-                              <FormControl>
-                                 <div className="relative">
-                                    <Lock
-                                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
-                                       size={18}
-                                    />
-                                    <Input
-                                       type={showPassword ? "text" : "password"}
-                                       placeholder={
-                                          showPassword ? "Contraseña" : "••••••••"
-                                       }
-                                       {...field}
-                                       className="pl-10"
-                                    />
-                                    <Button
-                                       type="button"
-                                       variant={"ghost"}
-                                       className="absolute right-0 top-0 text-muted-foreground"
-                                       onClick={() => toggleShowPassword()}
-                                       // disabled={isLoading}
-                                    >
-                                       {showPassword ? <Eye /> : <EyeOff />}
-                                    </Button>
-                                 </div>
-                              </FormControl>
-                              <FormMessage />
-                           </FormItem>
-                        )}
-                     />
-                     <div className="flex gap-2 pt-2">
-                        <Button
-                           variant={"default"}
-                           type="submit"
+               <div className="relative flex flex-col justify-between bg-background dark:bg-accent w-full sm:w-lg h-full overflow-y-auto">
+                  <div className="p-6 bg-accent border-b-1 sticky top-0 z-10">
+                     <h1 className="text-2xl font-bold">Crear usuario</h1>
+                     <p className="text-muted-foreground text-sm">
+                        Completa la información para crear una nueva cuenta
+                     </p>
+                     <Button
+                        type="button"
+                        variant={"ghost"}
+                        className="absolute right-2 top-2 text-muted-foreground"
+                        onClick={() => handleModal("")}
+                     >
+                        <X />
+                     </Button>
+                  </div>
+                  <div className="p-6 flex-1">
+                     <div className="grid gap-4">
+                        <FormField
+                           control={form.control}
+                           name="name"
                            // disabled={isLoading}
-                           className="flex-1/2"
-                        >
-                           Crear
-                        </Button>
-                        <Button
-                           type="button"
-                           variant={"outline"}
-                           onClick={() => handleModal("")}
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormLabel>Nombre</FormLabel>
+                                 <FormControl>
+                                    <div className="relative">
+                                       <User
+                                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                          size={18}
+                                       />
+                                       <Input
+                                          placeholder="Jhon Smith"
+                                          {...field}
+                                          className="pl-10"
+                                       />
+                                    </div>
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                        <FormField
+                           control={form.control}
+                           name="username"
                            // disabled={isLoading}
-                           className="flex-1/2"
-                        >
-                           Cancelar
-                        </Button>
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormLabel>Usuario</FormLabel>
+                                 <FormControl>
+                                    <div className="relative">
+                                       <AtSign
+                                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                          size={18}
+                                       />
+                                       <Input
+                                          placeholder="jhon06_"
+                                          {...field}
+                                          className="pl-10"
+                                       />
+                                    </div>
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                        <FormField
+                           control={form.control}
+                           name="phone"
+                           // disabled={isLoading}
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormLabel>Teléfono</FormLabel>
+                                 <FormControl>
+                                    <div className="relative">
+                                       <Phone
+                                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                          size={18}
+                                       />
+                                       <Input
+                                          placeholder="111-111-111"
+                                          {...field}
+                                          className="pl-10"
+                                       />
+                                    </div>
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                        <FormField
+                           control={form.control}
+                           name="email"
+                           // disabled={isLoading}
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormLabel>Correo</FormLabel>
+                                 <FormControl>
+                                    <div className="relative">
+                                       <Mail
+                                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                          size={18}
+                                       />
+                                       <Input
+                                          placeholder="jhon@gmail.com"
+                                          {...field}
+                                          className="pl-10"
+                                       />
+                                    </div>
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                        <FormField
+                           control={form.control}
+                           name="password"
+                           // disabled={isLoading}
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormLabel>Contraseña</FormLabel>
+                                 <FormControl>
+                                    <div className="relative">
+                                       <Lock
+                                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                                          size={18}
+                                       />
+                                       <Input
+                                          type={showPassword ? "text" : "password"}
+                                          placeholder={
+                                             showPassword ? "Contraseña" : "••••••••"
+                                          }
+                                          {...field}
+                                          className="pl-10"
+                                       />
+                                       <Button
+                                          type="button"
+                                          variant={"ghost"}
+                                          className="absolute right-0 top-0 text-muted-foreground"
+                                          onClick={() => toggleShowPassword()}
+                                          // disabled={isLoading}
+                                       >
+                                          {showPassword ? <Eye /> : <EyeOff />}
+                                       </Button>
+                                    </div>
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
                      </div>
+                  </div>
+                  <div className="flex bg-accent border-t-1 gap-2 p-6 sticky bottom-0 w-full">
+                     <Button
+                        variant={"default"}
+                        type="submit"
+                        // disabled={isLoading}
+                        className="flex-1/2"
+                     >
+                        Crear
+                     </Button>
+                     <Button
+                        type="button"
+                        variant={"outline"}
+                        onClick={() => handleModal("")}
+                        // disabled={isLoading}
+                        className="flex-1/2"
+                     >
+                        Cancelar
+                     </Button>
                   </div>
                </div>
             </form>

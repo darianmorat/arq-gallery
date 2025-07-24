@@ -21,15 +21,15 @@ export const Home = () => {
          {posts.map((post, i) => (
             <div
                key={i}
-               className="group relative overflow-hidden rounded-lg cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+               className="group relative overflow-hidden rounded-lg cursor-pointer transition-transform duration-200 hover:scale-[1.02] border shadow-md"
                onClick={() => navigate(`/post/${post.publicId}`)}
             >
                <img
-                  className="w-full rounded-lg transition-all duration-200 group-hover:brightness-85"
+                  className="w-full rounded-lg transition-all duration-200 group-hover:brightness-90"
                   src={post.mediaUrl}
                   alt={post.title}
                />
-               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg [background:radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.2)_70%,rgba(0,0,0,0.5)_100%)]" />
+               <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-200 rounded-lg [background:radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.2)_70%,rgba(0,0,0,0.5)_100%)]" />
 
                <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   <button className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-lg shadow-lg backdrop-blur-sm">

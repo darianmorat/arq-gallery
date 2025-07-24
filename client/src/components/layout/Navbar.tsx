@@ -46,12 +46,21 @@ export const Navbar = () => {
                {isAuth ? (
                   <>
                      {isAdmin ? (
-                        <Button
-                           onClick={() => navigate("/dashboard")}
-                           className="hidden sm:block"
-                        >
-                           Dashboard
-                        </Button>
+                        <>
+                           <Button
+                              variant={"outline"}
+                              onClick={() => navigate("/create")}
+                              className="hidden sm:block"
+                           >
+                              Ilustración
+                           </Button>
+                           <Button
+                              onClick={() => navigate("/dashboard")}
+                              className="hidden sm:block"
+                           >
+                              Dashboard
+                           </Button>
+                        </>
                      ) : (
                         <Button
                            onClick={() => navigate("/create")}
@@ -79,12 +88,20 @@ export const Navbar = () => {
                            </DropdownMenuItem>
 
                            {isAdmin ? (
-                              <DropdownMenuItem
-                                 onClick={() => navigate("/dashboard")}
-                                 className="sm:hidden"
-                              >
-                                 <Layers /> Dashboard
-                              </DropdownMenuItem>
+                              <>
+                                 <DropdownMenuItem
+                                    onClick={() => navigate("/create")}
+                                    className="sm:hidden"
+                                 >
+                                    <Layers /> Ilustración
+                                 </DropdownMenuItem>
+                                 <DropdownMenuItem
+                                    onClick={() => navigate("/dashboard")}
+                                    className="sm:hidden"
+                                 >
+                                    <Layers /> Dashboard
+                                 </DropdownMenuItem>
+                              </>
                            ) : (
                               <DropdownMenuItem
                                  onClick={() => navigate("/create")}

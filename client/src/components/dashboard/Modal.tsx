@@ -2,16 +2,29 @@ import type { PropsWithChildren } from "react";
 import { RemoveScroll } from "react-remove-scroll";
 import { cn } from "@/lib/utils";
 
+type orientationSide = "center" | "right";
+
 type ModalProps = PropsWithChildren<{
    className?: string;
+   orientation?: orientationSide;
 }>;
 
-export const Modal: React.FC<ModalProps> = ({ children, className }) => (
+const orientationVariants = {
+   center: "items-center justify-center",
+   right: "justify-end",
+};
+
+export const Modal: React.FC<ModalProps> = ({
+   children,
+   className,
+   orientation = "center",
+}) => (
    <RemoveScroll>
       <div
          className={cn(
-            "fixed inset-0 bg-black/50 flex items-center justify-center z-2",
+            "fixed inset-0 bg-black/50 flex z-10",
             className,
+            orientationVariants[orientation],
          )}
       >
          {children}
