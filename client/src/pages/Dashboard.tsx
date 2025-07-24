@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { LayoutContainer } from "@/components/layout/Container";
 import { useState } from "react";
-import { Apprentices } from "@/components/dashboard/Apprentices";
-import { Categories } from "@/components/dashboard/Categories";
+import { Apprentices } from "@/components/dashboard/apprentices/Apprentices";
+import { Categories } from "@/components/dashboard/categories/Categories";
 
 export const Dashboard = () => {
    const [isActive, setIsActive] = useState(1);

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
    Form,
    FormControl,
@@ -7,14 +7,14 @@ import {
    FormItem,
    FormLabel,
    FormMessage,
-} from "../ui/form";
+} from "../../ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "../ui/input";
+import { Input } from "../../ui/input";
 import { User, Mail, Lock, X, Eye, EyeOff, AtSign, Phone } from "lucide-react";
 import { useState } from "react";
 import { useDashStore } from "@/stores/useDashStore";
-import { Modal } from "./Modal";
+import { Modal } from "../Modal";
 
 // PENDING:
 // WE SHOULD NOT CLOSE THE MODAL WHEN THE USERNAME OR EMAIL IS ALREADY IN USE, WE

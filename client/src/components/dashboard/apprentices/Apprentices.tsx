@@ -1,8 +1,8 @@
-import { Eye, List, Plus, Trash } from "lucide-react";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
+import { Eye, PencilLine, Plus, Trash } from "lucide-react";
+import { Button } from "../../ui/button";
+import { Separator } from "../../ui/separator";
 import { useEffect, useState } from "react";
-import { CreateUserModal } from "./CreateUserModal";
+import { CreateUserModal } from "../apprentices/CreateUserModal";
 import { useDashStore } from "@/stores/useDashStore";
 import { DeleteUserModal } from "./DeleteUserModal";
 import { useNavigate } from "react-router-dom";
@@ -87,14 +87,15 @@ export const Apprentices = () => {
                            posts
                         </td>
                         <td className="px-6 py-4 text-right space-x-2">
+                           <Button variant="outline">
+                              <PencilLine /> Editar
+                           </Button>
                            <Button
                               variant="outline"
+                              className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                               onClick={() => navigate(`/${user.username}`)}
                            >
                               <Eye /> Ver perfil
-                           </Button>
-                           <Button variant="outline">
-                              <List /> Ver posts
                            </Button>
                            <Button
                               variant="outline"

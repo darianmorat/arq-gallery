@@ -1,6 +1,6 @@
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { X } from "lucide-react";
-import { Modal } from "./Modal";
+import { Modal } from "../Modal";
 import { useDashStore } from "@/stores/useDashStore";
 
 type User = {

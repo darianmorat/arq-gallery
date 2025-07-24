@@ -1,6 +1,6 @@
 import { PencilLine, Plus, Trash, Hash } from "lucide-react";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
+import { Button } from "../../ui/button";
+import { Separator } from "../../ui/separator";
 import { useEffect, useState } from "react";
 import { useDashStore } from "@/stores/useDashStore";
 import { CreateCategoryModal } from "./CreateCategoryModal";
