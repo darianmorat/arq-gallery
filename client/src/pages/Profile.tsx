@@ -150,7 +150,7 @@ export const Profile = () => {
             {posts.length <= 0 ? (
                <p>Opps! Parece que no hay nada para mostrar</p>
             ) : (
-               <LayoutContainer className="columns-2 p-0 md:columns-3 lg:columns-4 gap-4 space-y-4 min-h-screen">
+               <LayoutContainer className="columns-2 p-0 md:columns-3 lg:columns-4 gap-4 space-y-4">
                   {posts.map((post, i) => (
                      <div
                         key={i}
