@@ -115,7 +115,10 @@ export const Navbar = () => {
 
                            <DropdownMenuItem
                               className="text-red-600 focus:text-red-700 focus:bg-red-50 dark:focus:bg-red-50/10 dark:font-medium"
-                              onClick={() => logout()}
+                              onClick={() => {
+                                 navigate("/");
+                                 logout();
+                              }}
                            >
                               <LogOut className="text-red-600" /> Cerrar sesión
                            </DropdownMenuItem>
