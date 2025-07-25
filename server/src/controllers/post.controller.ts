@@ -102,3 +102,20 @@ export const getAllUser = async (req: Request, res: Response) => {
       });
    }
 };
+
+export const deletePost = async (req: Request, res: Response) => {
+   try {
+      const { id } = req.params;
+      const deletedPost = await postService.delete(id);
+
+      res.status(200).json({
+         success: true,
+         message: `"${deletedPost.title}" eliminado`,
+      });
+   } catch (error) {
+      res.status(500).json({
+         success: false,
+         message: "server error",
+      });
+   }
+};

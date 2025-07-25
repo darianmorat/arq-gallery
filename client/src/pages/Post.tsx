@@ -12,13 +12,20 @@ import {
 } from "lucide-react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { usePublicStore } from "@/stores/usePublicStore";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useFormatDate } from "@/hooks/useFormatDate";
+import { DeletePostModal } from "@/components/dashboard/DeletePostModal";
+
+type Post = {
+   id: string;
+   title: string;
+};
 
 export const Post = () => {
    const { isLoading, notFound, postProfile, getPost } = usePublicStore();
-   // const [showModal, setShowModal] = useState({ active: false, for: "" });
+   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+   const [showModal, setShowModal] = useState({ active: false, for: "" });
    const { user } = useAuthStore();
    const { post } = useParams();
 
@@ -31,6 +38,10 @@ export const Post = () => {
    const isMyPost = user?.username === postProfile?.author.username;
    const createdAt = useFormatDate(postProfile?.createdAt);
    const imageRef = useRef<HTMLImageElement>(null);
+
+   const handleModal = (modal: string): void => {
+      setShowModal((prev) => ({ active: !prev.active, for: modal }));
+   };
 
    useEffect(() => {
       if (post) {
@@ -62,125 +73,143 @@ export const Post = () => {
    };
 
    return (
-      <LayoutContainer size="medium">
-         <div className="dark:bg-accent/80 rounded-xl shadow overflow-hidden border">
-            <div className="relative flex justify-center bg-black dark:bg-background group">
-               <img
-                  ref={imageRef}
-                  src={postProfile?.mediaUrl}
-                  alt={postProfile?.title}
-                  className="max-w-full h-auto max-h-[450px] object-contain"
-               />
-               <Fullscreen
-                  size={35}
-                  onClick={handleFullscreen}
-                  className="absolute bottom-2 right-2 opacity-0 bg-black/30 hover:bg-black/40 rounded-md p-1 group-hover:opacity-100 transition-opacity text-white cursor-pointer"
-               />
-            </div>
-            <div className="p-8">
-               <div className="flex flex-wrap gap-4 justify-between items-center mb-6">
-                  <div>
-                     <div className="border-l-4 border-black dark:border-white pl-3">
-                        <p className="font-semibold">{postProfile?.author.name}</p>
-                        <p className="text-sm text-muted-foreground">Autor</p>
-                     </div>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                     <Heart
-                        size={35}
-                        className="text-gray-600 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg cursor-pointer"
-                     />
-
-                     <Share2
-                        size={35}
-                        className="text-gray-600 hover:text-blue-500 hover:bg-blue-50 p-2 rounded-lg cursor-pointer"
-                     />
-
-                     {!isMyPost && (
-                        <>
-                           <Download
-                              size={35}
-                              className="text-gray-600 hover:text-green-500 hover:bg-green-50 p-2 rounded-lg cursor-pointer"
-                           />
-
-                           <DollarSign
-                              size={35}
-                              className="text-gray-600 hover:text-yellow-500 hover:bg-yellow-50 p-2 rounded-lg cursor-pointer"
-                              onClick={() => window.open(url, "_blank")}
-                           />
-                           <Button
-                              variant={"outline"}
-                              onClick={() => navigate(`/${postProfile?.author.username}`)}
-                           >
-                              Ver perfil
-                           </Button>
-                        </>
-                     )}
-
-                     {isMyPost && (
-                        <div>
-                           <Button>Editar publicación</Button>
+      <>
+         <LayoutContainer size="medium">
+            <div className="dark:bg-accent/80 rounded-xl shadow overflow-hidden border">
+               <div className="relative flex justify-center bg-black dark:bg-background group">
+                  <img
+                     ref={imageRef}
+                     src={postProfile?.mediaUrl}
+                     alt={postProfile?.title}
+                     className="max-w-full h-auto max-h-[450px] object-contain"
+                  />
+                  <Fullscreen
+                     size={35}
+                     onClick={handleFullscreen}
+                     className="absolute bottom-2 right-2 opacity-0 bg-black/30 hover:bg-black/40 rounded-md p-1 group-hover:opacity-100 transition-opacity text-white cursor-pointer"
+                  />
+               </div>
+               <div className="p-8 border-t">
+                  <div className="flex flex-wrap gap-4 justify-between items-center mb-6">
+                     <div>
+                        <div className="border-l-4 border-black dark:border-white pl-3">
+                           <p className="font-semibold">{postProfile?.author.name}</p>
+                           <p className="text-sm text-muted-foreground">Autor</p>
                         </div>
-                     )}
-                  </div>
-               </div>
+                     </div>
 
-               <h1 className="text-3xl font-bold mb-6 leading-tight">
-                  {postProfile?.title}
-               </h1>
+                     <div className="flex items-center gap-2">
+                        <Heart
+                           size={35}
+                           className="text-gray-600 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg cursor-pointer"
+                        />
 
-               <div className="space-y-4 mb-6">
-                  <div className="flex items-start gap-4 p-4 rounded-lg border">
-                     <User className="w-5 h-5 mt-1 flex-shrink-0" />
-                     <div className="flex-1">
-                        <label className="text-sm font-medium text-muted-foreground block mb-1">
-                           Descripción
-                        </label>
-                        <p className="text-muted-foreground/70">
-                           {postProfile?.description}
-                        </p>
+                        <Share2
+                           size={35}
+                           className="text-gray-600 hover:text-blue-500 hover:bg-blue-50 p-2 rounded-lg cursor-pointer"
+                        />
+
+                        {!isMyPost && (
+                           <>
+                              <Download
+                                 size={35}
+                                 className="text-gray-600 hover:text-green-500 hover:bg-green-50 p-2 rounded-lg cursor-pointer"
+                              />
+
+                              <DollarSign
+                                 size={35}
+                                 className="text-gray-600 hover:text-yellow-500 hover:bg-yellow-50 p-2 rounded-lg cursor-pointer"
+                                 onClick={() => window.open(url, "_blank")}
+                              />
+                              <Button
+                                 variant={"outline"}
+                                 onClick={() =>
+                                    navigate(`/${postProfile?.author.username}`)
+                                 }
+                              >
+                                 Ver perfil
+                              </Button>
+                              <Button
+                                 variant={"outline"}
+                                 className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                 onClick={() => {
+                                    handleModal("delete");
+                                    setSelectedPost(postProfile);
+                                 }}
+                              >
+                                 Eliminar post
+                              </Button>
+                           </>
+                        )}
+
+                        {isMyPost && (
+                           <div>
+                              <Button>Editar publicación</Button>
+                           </div>
+                        )}
                      </div>
                   </div>
 
-                  <div className="flex items-center gap-4 p-4 rounded-lg border">
-                     <Calendar className="w-5 h-5 flex-shrink-0" />
-                     <div className="flex-1">
-                        <label className="text-sm font-medium text-muted-foreground block mb-1">
-                           Fecha de publicación
-                        </label>
-                        <p className="text-muted-foreground/70">{createdAt}</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div className="dark:bg-accent/80 rounded-xl shadow overflow-hidden border mt-4">
-            <div className="p-8">
-               <div className="flex bg-blue-50 dark:bg-blue-200/10 items-start gap-4 p-4 rounded-lg border border-blue-200 dark:border-blue-200/50">
-                  <Tag className="w-5 h-5 mt-1 flex-shrink-0" />
-                  <div className="flex-1">
-                     {postProfile?.category ? (
-                        <>
-                           <p className="text-muted-foreground mb-2">
-                              #{postProfile?.category.tag}
-                           </p>
-                           <h3 className="text-lg font-semibold mb-1">
-                              {postProfile?.category.title}
-                           </h3>
+                  <h1 className="text-3xl font-bold mb-6 leading-tight">
+                     {postProfile?.title}
+                  </h1>
+
+                  <div className="space-y-4 mb-6">
+                     <div className="flex items-start gap-4 p-4 rounded-lg border">
+                        <User className="w-5 h-5 mt-1 flex-shrink-0" />
+                        <div className="flex-1">
+                           <label className="text-sm font-medium text-muted-foreground block mb-1">
+                              Descripción
+                           </label>
                            <p className="text-muted-foreground/70">
-                              {postProfile?.category.description}
+                              {postProfile?.description}
                            </p>
-                        </>
-                     ) : (
-                        <>
-                           <p className="text-muted-foreground">Sin categoría</p>
-                        </>
-                     )}
+                        </div>
+                     </div>
+
+                     <div className="flex items-center gap-4 p-4 rounded-lg border">
+                        <Calendar className="w-5 h-5 flex-shrink-0" />
+                        <div className="flex-1">
+                           <label className="text-sm font-medium text-muted-foreground block mb-1">
+                              Fecha de publicación
+                           </label>
+                           <p className="text-muted-foreground/70">{createdAt}</p>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-      </LayoutContainer>
+            <div className="dark:bg-accent/80 rounded-xl shadow overflow-hidden border mt-4">
+               <div className="p-8">
+                  <div className="flex bg-blue-50 dark:bg-blue-200/10 items-start gap-4 p-4 rounded-lg border border-blue-200 dark:border-blue-200/50">
+                     <Tag className="w-5 h-5 mt-1 flex-shrink-0" />
+                     <div className="flex-1">
+                        {postProfile?.category ? (
+                           <>
+                              <p className="text-muted-foreground mb-2">
+                                 #{postProfile?.category.tag}
+                              </p>
+                              <h3 className="text-lg font-semibold mb-1">
+                                 {postProfile?.category.title}
+                              </h3>
+                              <p className="text-muted-foreground/70">
+                                 {postProfile?.category.description}
+                              </p>
+                           </>
+                        ) : (
+                           <>
+                              <p className="text-muted-foreground">Sin categoría</p>
+                           </>
+                        )}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </LayoutContainer>
+
+         {showModal.active && selectedPost && (
+            <DeletePostModal handleModal={() => handleModal("")} post={selectedPost} />
+         )}
+      </>
    );
 };

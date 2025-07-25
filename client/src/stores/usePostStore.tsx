@@ -21,9 +21,10 @@ type Store = {
    getPosts: () => Promise<void>;
    getUserPosts: (username: string) => Promise<void>;
    uploadPost: (files: File[], formValues: Values) => Promise<boolean | void>;
+   deletePost: (id: string) => Promise<void>;
 };
 
-export const usePostStore = create<Store>((set, _get) => ({
+export const usePostStore = create<Store>((set, get) => ({
    isLoading: false,
    posts: [],
 
@@ -111,6 +112,22 @@ export const usePostStore = create<Store>((set, _get) => ({
          return true;
       } catch (error) {
          toast.error(error.response?.data?.message || "Fallo en subida");
+      } finally {
+         set({ isLoading: false });
+      }
+   },
+
+   deletePost: async (id) => {
+      set({ isLoading: true });
+      try {
+         const res = await api.delete(`/post/delete/${id}`);
+
+         if (res.data.success) {
+            toast.success(res.data.message);
+            await get().getPosts();
+         }
+      } catch (error) {
+         toast.error(error.response.data.message);
       } finally {
          set({ isLoading: false });
       }

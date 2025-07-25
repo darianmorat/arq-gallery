@@ -71,4 +71,13 @@ export const postService = {
 
       return post;
    },
+
+   delete: async (id: string) => {
+      const [deletedPost] = await db
+         .delete(posts)
+         .where(eq(posts.id, id))
+         .returning({ title: posts.title });
+
+      return deletedPost;
+   },
 };
