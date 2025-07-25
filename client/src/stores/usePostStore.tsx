@@ -2,6 +2,12 @@ import { create } from "zustand";
 import { toast } from "react-toastify";
 import api from "@/api/axios";
 
+// ORGANIZE THIS BETTER, YOU HAVE SOME ROUTES SEPARATED.... users, categories, posts, etc
+// ALL OF THEM ARE UNIQUE, SO EACH ONE OF THEM SHOULD HAVE IT'S SEPARATED FILE DO THAT
+
+// ALSO FIND WAYS TO AVOID THAT MUCH REPETITION IN THE MODALS SECTION, AND THINK ABOUT
+// THE OTHER APP THAT WE GOTTA MAKE NOW
+
 type Post = {
    id: string;
    mediaUrl: string;

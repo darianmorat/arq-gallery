@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoute from "./routes/auth.route";
-import adminRoute from "./routes/admin.route";
+import categoryRoute from "./routes/category.route";
+import userRoute from "./routes/user.route";
 import postRoute from "./routes/post.route";
 import publicRoute from "./routes/public.route";
 
@@ -18,7 +19,8 @@ app.use(
 );
 
 app.use("/auth", authRoute);
-app.use("/admin", adminRoute);
+app.use("/category", categoryRoute);
+app.use("/user", userRoute);
 app.use("/post", postRoute);
 app.use("/public", publicRoute);
 

@@ -14,7 +14,6 @@ router.get("/get-all", getAll);
 router.get("/get-all-user/:username", getAllUser);
 router.get("/generate-signature", privateRoute, signature);
 router.post("/save-metadata", privateRoute, metadata);
-
 router.delete("/delete/:id", privateRoute, deletePost);
 
 export default router;

@@ -1,7 +1,7 @@
 import { Button } from "../../ui/button";
 import { X } from "lucide-react";
 import { Modal } from "../Modal";
-import { useDashStore } from "@/stores/useDashStore";
+import { useCategoryStore } from "@/stores/useCategoryStore";
 
 type Category = {
    id: string;
@@ -17,7 +17,7 @@ export const DeleteCategoryModal = ({
    handleModal,
    category,
 }: DeleteCategoryModalProps) => {
-   const { deleteCategory } = useDashStore();
+   const { deleteCategory } = useCategoryStore();
 
    return (
       <Modal>

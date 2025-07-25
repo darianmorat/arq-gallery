@@ -13,8 +13,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../ui/input";
 import { User, Mail, Lock, X, Eye, EyeOff, AtSign, Phone } from "lucide-react";
 import { useState } from "react";
-import { useDashStore } from "@/stores/useDashStore";
 import { Modal } from "../Modal";
+import { useUserStore } from "@/stores/useUserStore";
 
 // PENDING:
 // WE SHOULD NOT CLOSE THE MODAL WHEN THE USERNAME OR EMAIL IS ALREADY IN USE, WE
@@ -55,7 +55,7 @@ const formSchema = z.object({
 
 export const CreateUserModal = ({ handleModal }: CreateUserModalProps) => {
    const [showPassword, setShowPassword] = useState(false);
-   const { createUser } = useDashStore();
+   const { createUser } = useUserStore();
 
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),

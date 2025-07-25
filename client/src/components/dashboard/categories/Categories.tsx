@@ -2,7 +2,7 @@ import { PencilLine, Plus, Trash, Hash } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Separator } from "../../ui/separator";
 import { useEffect, useState } from "react";
-import { useDashStore } from "@/stores/useDashStore";
+import { useCategoryStore } from "@/stores/useCategoryStore";
 import { CreateCategoryModal } from "./CreateCategoryModal";
 import { DeleteCategoryModal } from "./DeleteCategoryModal";
 
@@ -14,7 +14,7 @@ type Category = {
 export const Categories = () => {
    const [showModal, setShowModal] = useState({ active: false, for: "" });
    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
-   const { categories = [], getCategories } = useDashStore();
+   const { categories = [], getCategories } = useCategoryStore();
 
    const handleModal = (modal: string): void => {
       setShowModal((prev) => ({ active: !prev.active, for: modal }));

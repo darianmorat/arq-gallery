@@ -1,7 +1,7 @@
 import { Button } from "../../ui/button";
 import { X } from "lucide-react";
 import { Modal } from "../Modal";
-import { useDashStore } from "@/stores/useDashStore";
+import { useUserStore } from "@/stores/useUserStore";
 
 type User = {
    id: string;
@@ -14,7 +14,7 @@ type DeleteUserModalProps = {
 };
 
 export const DeleteUserModal = ({ handleModal, user }: DeleteUserModalProps) => {
-   const { deleteUser } = useDashStore();
+   const { deleteUser } = useUserStore();
 
    return (
       <Modal>

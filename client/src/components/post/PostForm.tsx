@@ -19,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { FileText, AlignLeft, List, X } from "lucide-react";
 import { Textarea } from "../ui/textarea";
-import { useDashStore } from "@/stores/useDashStore";
+import { useCategoryStore } from "@/stores/useCategoryStore";
 import { useEffect, useState } from "react";
 import { DropImage } from "./DropImage";
 import { usePostStore } from "@/stores/usePostStore";
@@ -49,7 +49,7 @@ const formSchema = z.object({
 export const PostForm = () => {
    const [files, setFiles] = useState<FileWithPreview[]>([]);
    const { isLoading, uploadPost } = usePostStore();
-   const { categories = [], getCategories } = useDashStore();
+   const { categories = [], getCategories } = useCategoryStore();
    const [successPopup, setSuccessPopup] = useState(false);
 
    const navigate = useNavigate();

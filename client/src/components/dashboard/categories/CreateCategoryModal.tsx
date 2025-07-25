@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../ui/input";
 import { X, FileText, Hash, AlignLeft } from "lucide-react";
-import { useDashStore } from "@/stores/useDashStore";
+import { useCategoryStore } from "@/stores/useCategoryStore";
 import { Modal } from "../Modal";
 import { Textarea } from "../../ui/textarea";
 
@@ -41,7 +41,7 @@ const formSchema = z.object({
 });
 
 export const CreateCategoryModal = ({ handleModal }: CreateCategoryModalProps) => {
-   const { createCategory } = useDashStore();
+   const { createCategory } = useCategoryStore();
 
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),

@@ -3,9 +3,9 @@ import { Button } from "../../ui/button";
 import { Separator } from "../../ui/separator";
 import { useEffect, useState } from "react";
 import { CreateUserModal } from "../apprentices/CreateUserModal";
-import { useDashStore } from "@/stores/useDashStore";
 import { DeleteUserModal } from "./DeleteUserModal";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "@/stores/useUserStore";
 
 // PENDING:
 // DINAMIC POSTS FOR THE APPRENTICES IN THE TABLE
@@ -19,7 +19,7 @@ type User = {
 export const Apprentices = () => {
    const [showModal, setShowModal] = useState({ active: false, for: "" });
    const [selectedUser, setSelectedUser] = useState<User | null>(null);
-   const { users = [], getUsers } = useDashStore();
+   const { users = [], getUsers } = useUserStore();
 
    const navigate = useNavigate();
    const totalPosts = users.reduce((sum, user) => sum + user.posts.length, 0);
