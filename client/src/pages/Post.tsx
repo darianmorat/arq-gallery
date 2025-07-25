@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useFormatDate } from "@/hooks/useFormatDate";
 import { DeletePostModal } from "@/components/dashboard/DeletePostModal";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 type Post = {
    id: string;
@@ -26,6 +27,7 @@ export const Post = () => {
    const { isLoading, notFound, postProfile, getPost } = usePublicStore();
    const [selectedPost, setSelectedPost] = useState<Post | null>(null);
    const [showModal, setShowModal] = useState({ active: false, for: "" });
+   const isAdmin = useIsAdmin();
    const { user } = useAuthStore();
    const { post } = useParams();
 
@@ -129,16 +131,18 @@ export const Post = () => {
                               >
                                  Ver perfil
                               </Button>
-                              <Button
-                                 variant={"outline"}
-                                 className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                                 onClick={() => {
-                                    handleModal("delete");
-                                    setSelectedPost(postProfile);
-                                 }}
-                              >
-                                 Eliminar post
-                              </Button>
+                              {isAdmin && (
+                                 <Button
+                                    variant={"outline"}
+                                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                    onClick={() => {
+                                       handleModal("delete");
+                                       setSelectedPost(postProfile);
+                                    }}
+                                 >
+                                    Eliminar post
+                                 </Button>
+                              )}
                            </>
                         )}
 
