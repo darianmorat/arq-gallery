@@ -5,12 +5,14 @@ import {
    getAll,
    getAllUser,
    deletePost,
+   getPostProfile,
 } from "../controllers/post.controller";
 import { privateRoute } from "../middleware/auth.middleware";
 
 const router = express.Router();
 
 router.get("/get-all", getAll);
+router.get("/get/:publicid", getPostProfile);
 router.get("/get-all-user/:username", getAllUser);
 router.get("/generate-signature", privateRoute, signature);
 router.post("/save-metadata", privateRoute, metadata);

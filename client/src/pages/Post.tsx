@@ -11,12 +11,12 @@ import {
    Fullscreen,
 } from "lucide-react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { usePublicStore } from "@/stores/usePublicStore";
 import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useFormatDate } from "@/hooks/useFormatDate";
 import { DeletePostModal } from "@/components/dashboard/DeletePostModal";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
+import { usePostStore } from "@/stores/usePostStore";
 
 type Post = {
    id: string;
@@ -24,7 +24,7 @@ type Post = {
 };
 
 export const Post = () => {
-   const { isLoading, notFound, postProfile, getPost } = usePublicStore();
+   const { isLoading, notFound, postProfile, getPost } = usePostStore();
    const [selectedPost, setSelectedPost] = useState<Post | null>(null);
    const [showModal, setShowModal] = useState({ active: false, for: "" });
    const isAdmin = useIsAdmin();

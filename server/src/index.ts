@@ -5,7 +5,6 @@ import authRoute from "./routes/auth.route";
 import categoryRoute from "./routes/category.route";
 import userRoute from "./routes/user.route";
 import postRoute from "./routes/post.route";
-import publicRoute from "./routes/public.route";
 
 const app = express();
 
@@ -20,9 +19,8 @@ app.use(
 
 app.use("/auth", authRoute);
 app.use("/category", categoryRoute);
-app.use("/user", userRoute);
 app.use("/post", postRoute);
-app.use("/public", publicRoute);
+app.use("/user", userRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

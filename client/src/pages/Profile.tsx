@@ -4,17 +4,17 @@ import { useFormatDate } from "@/hooks/useFormatDate";
 import { User, Mail, Calendar, LogOut, Heart } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { usePublicStore } from "@/stores/usePublicStore";
 import { useEffect } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { usePostStore } from "@/stores/usePostStore";
+import { useUserStore } from "@/stores/useUserStore";
 
 // PENDING:
 // HOW TO HANDLE THE ADMIN PROFILE, CAUSE HE SHOULD NOT GET ANY DONATION, SO WE SHOULD
 // IGNORE THAT SPECIFIC PROFILE ALONE
 
 export const Profile = () => {
-   const { isLoading, userProfile, notFound, getUser } = usePublicStore();
+   const { isLoading, userProfile, notFound, getUser } = useUserStore();
    const { posts, getUserPosts } = usePostStore();
    const { user, logout } = useAuthStore();
    const { username } = useParams();

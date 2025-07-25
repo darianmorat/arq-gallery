@@ -2,17 +2,24 @@ import { create } from "zustand";
 import { toast } from "react-toastify";
 import api from "@/api/axios";
 
-// ORGANIZE THIS BETTER, YOU HAVE SOME ROUTES SEPARATED.... users, categories, posts, etc
-// ALL OF THEM ARE UNIQUE, SO EACH ONE OF THEM SHOULD HAVE IT'S SEPARATED FILE DO THAT
-
-// ALSO FIND WAYS TO AVOID THAT MUCH REPETITION IN THE MODALS SECTION, AND THINK ABOUT
-// THE OTHER APP THAT WE GOTTA MAKE NOW
 
 type Post = {
    id: string;
-   mediaUrl: string;
    title: string;
+   description: string;
    publicId: string;
+   author: {
+      name: string;
+      username: string;
+      phone: string;
+   };
+   category: {
+      title: string;
+      description: string;
+      tag: string;
+   } | null;
+   mediaUrl: string;
+   createdAt: string;
 };
 
 type Values = {
@@ -23,8 +30,11 @@ type Values = {
 
 type Store = {
    isLoading: boolean;
+   notFound: boolean;
+   postProfile: Post | null;
    posts: Post[];
    getPosts: () => Promise<void>;
+   getPost: (publicId: string) => Promise<void>;
    getUserPosts: (username: string) => Promise<void>;
    uploadPost: (files: File[], formValues: Values) => Promise<boolean | void>;
    deletePost: (id: string) => Promise<void>;
@@ -32,6 +42,8 @@ type Store = {
 
 export const usePostStore = create<Store>((set, get) => ({
    isLoading: false,
+   notFound: false,
+   postProfile: null,
    posts: [],
 
    getPosts: async () => {
@@ -44,6 +56,21 @@ export const usePostStore = create<Store>((set, get) => ({
          }
       } catch (error) {
          toast.error(error.response.data.message);
+      } finally {
+         set({ isLoading: false });
+      }
+   },
+
+   getPost: async (publicId) => {
+      set({ isLoading: true, notFound: false });
+      try {
+         const res = await api.get(`/post/get/${publicId}`);
+
+         if (res.data.success) {
+            set({ postProfile: res.data.post });
+         }
+      } catch (_error) {
+         set({ notFound: true });
       } finally {
          set({ isLoading: false });
       }

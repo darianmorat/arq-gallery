@@ -86,6 +86,30 @@ export const getAll = async (_req: Request, res: Response) => {
    }
 };
 
+export const getPostProfile = async (req: Request, res: Response) => {
+   try {
+      const { publicid } = req.params;
+      const post = await postService.getByPublicId(publicid);
+
+      if (!post) {
+         res.status(404).json({
+            success: false,
+         });
+         return;
+      }
+
+      res.status(200).json({
+         success: true,
+         post,
+      });
+   } catch (error) {
+      res.status(500).json({
+         success: false,
+         message: "server error",
+      });
+   }
+};
+
 export const getAllUser = async (req: Request, res: Response) => {
    try {
       const { username } = req.params;
