@@ -37,13 +37,13 @@ export const Apprentices = () => {
       <>
          <div className="flex gap-4 justify-center items-center flex-col sm:flex-row sm:gap-12 sm:justify-between">
             <div className="flex gap-8">
-               <div className="text-center">
+               <div className="text-center sm:text-left">
                   <p className="text-3xl font-bold">
                      {users.length.toString().padStart(2, "0")}
                   </p>
                   <h1>Total usuarios</h1>
                </div>
-               <div className="text-center">
+               <div className="text-center sm:text-left">
                   <p className="text-3xl font-bold">
                      {totalPosts.toString().padStart(2, "0")}
                   </p>
