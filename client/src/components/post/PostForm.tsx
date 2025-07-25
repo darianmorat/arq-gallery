@@ -170,13 +170,13 @@ export const PostForm = () => {
                   </div>
                   <div className="flex-1">
                      <DropImage files={files} setFiles={setFiles} />
-                     <div className="flex justify-end items-center pt-6 border-t gap-3">
+                     <div className="flex flex-wrap justify-end items-center pt-6 border-t gap-3">
                         {files.length >= 1 && (
                            <Button
                               variant="outline"
                               onClick={() => setFiles([])}
                               disabled={isLoading}
-                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50 flex-1 sm:flex-0"
                            >
                               Limpiar imágenes
                            </Button>
@@ -187,12 +187,14 @@ export const PostForm = () => {
                               type="button"
                               variant="outline"
                               disabled={isLoading || files.length === 0}
+                              className="flex-1 sm:flex-0"
                            >
                               Vista previa
                            </Button>
                            <Button
                               variant="default"
                               disabled={isLoading || files.length === 0 || !isFormValid}
+                              className="flex-1 sm:flex-0"
                            >
                               {isLoading ? (
                                  <>Subiendo publicación...</>

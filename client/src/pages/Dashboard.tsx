@@ -24,7 +24,7 @@ export const Dashboard = () => {
    };
 
    return (
-      <div>
+      <div className="pb-4">
          <div className="bg-blue-200 dark:bg-blue-950">
             <LayoutContainer size="medium">
                <h3 className="text-3xl font-bold">Panel de administración</h3>

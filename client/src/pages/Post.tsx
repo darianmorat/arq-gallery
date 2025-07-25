@@ -78,7 +78,7 @@ export const Post = () => {
       <>
          <LayoutContainer size="medium">
             <div className="dark:bg-accent/80 rounded-xl shadow overflow-hidden border">
-               <div className="relative flex justify-center bg-black dark:bg-background group">
+               <div className="relative flex justify-center bg-black dark:bg-background">
                   <img
                      ref={imageRef}
                      src={postProfile?.mediaUrl}
@@ -88,68 +88,71 @@ export const Post = () => {
                   <Fullscreen
                      size={35}
                      onClick={handleFullscreen}
-                     className="absolute bottom-2 right-2 opacity-0 bg-black/30 hover:bg-black/40 rounded-md p-1 group-hover:opacity-100 transition-opacity text-white cursor-pointer"
+                     className="absolute bottom-2 right-2 bg-black/30 hover:bg-black/40 rounded-md p-1 group-hover:opacity-100 transition-opacity text-white cursor-pointer"
                   />
                </div>
                <div className="p-8 border-t">
                   <div className="flex flex-wrap gap-4 justify-between items-center mb-6">
-                     <div>
+                     <div className="flex-1 min-w-fit">
                         <div className="border-l-4 border-black dark:border-white pl-3">
                            <p className="font-semibold">{postProfile?.author.name}</p>
                            <p className="text-sm text-muted-foreground">Autor</p>
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-2">
+                     <div className="flex flex-1 justify-end gap-2">
                         <Heart
                            size={35}
-                           className="text-gray-600 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg cursor-pointer"
+                           className="text-gray-600 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg cursor-pointer border"
                         />
 
                         <Share2
                            size={35}
-                           className="text-gray-600 hover:text-blue-500 hover:bg-blue-50 p-2 rounded-lg cursor-pointer"
+                           className="text-gray-600 hover:text-blue-500 hover:bg-blue-50 p-2 rounded-lg cursor-pointer border"
                         />
 
                         {!isMyPost && (
                            <>
                               <Download
                                  size={35}
-                                 className="text-gray-600 hover:text-green-500 hover:bg-green-50 p-2 rounded-lg cursor-pointer"
+                                 className="text-gray-600 hover:text-green-500 hover:bg-green-50 p-2 rounded-lg cursor-pointer border"
                               />
 
                               <DollarSign
                                  size={35}
-                                 className="text-gray-600 hover:text-yellow-500 hover:bg-yellow-50 p-2 rounded-lg cursor-pointer"
+                                 className="text-gray-600 hover:text-yellow-500 hover:bg-yellow-50 p-2 rounded-lg cursor-pointer border"
                                  onClick={() => window.open(url, "_blank")}
                               />
-                              <Button
-                                 variant={"outline"}
-                                 onClick={() =>
-                                    navigate(`/${postProfile?.author.username}`)
-                                 }
-                              >
-                                 Ver perfil
-                              </Button>
-                              {isAdmin && (
-                                 <Button
-                                    variant={"outline"}
-                                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                                    onClick={() => {
-                                       handleModal("delete");
-                                       setSelectedPost(postProfile);
-                                    }}
-                                 >
-                                    Eliminar post
-                                 </Button>
-                              )}
                            </>
+                        )}
+                     </div>
+
+                     <div className="flex gap-2 flex-wrap justify-end w-full sm:w-fit">
+                        {!isMyPost && (
+                           <Button
+                              variant={"outline"}
+                              onClick={() => navigate(`/${postProfile?.author.username}`)}
+                              className="flex-1"
+                           >
+                              Ver perfil
+                           </Button>
+                        )}
+
+                        {isAdmin && (
+                           <Button
+                              variant={"outline"}
+                              onClick={() => {
+                                 handleModal("delete");
+                                 setSelectedPost(postProfile);
+                              }}
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50 flex-1"
+                           >
+                              Eliminar post
+                           </Button>
                         )}
 
                         {isMyPost && (
-                           <div>
-                              <Button>Editar publicación</Button>
-                           </div>
+                           <Button className="flex-1">Editar publicación</Button>
                         )}
                      </div>
                   </div>

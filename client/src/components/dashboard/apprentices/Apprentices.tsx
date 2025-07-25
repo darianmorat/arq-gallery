@@ -35,15 +35,15 @@ export const Apprentices = () => {
 
    return (
       <>
-         <div className="flex gap-4 justify-between items-center">
+         <div className="flex gap-4 justify-center items-center flex-col sm:flex-row sm:gap-12 sm:justify-between">
             <div className="flex gap-8">
-               <div>
+               <div className="text-center">
                   <p className="text-3xl font-bold">
                      {users.length.toString().padStart(2, "0")}
                   </p>
                   <h1>Total usuarios</h1>
                </div>
-               <div>
+               <div className="text-center">
                   <p className="text-3xl font-bold">
                      {totalPosts.toString().padStart(2, "0")}
                   </p>

@@ -60,7 +60,7 @@ export const Profile = () => {
             </div>
          )}
          <div className="rounded-lg border p-6 flex flex-col gap-4">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center flex-wrap gap-4">
                <div className="flex items-center">
                   <div className="w-16 h-16 bg-blue-200/80 rounded-full flex items-center justify-center">
                      <Avatar className="cursor-pointer pb-1">
@@ -77,14 +77,14 @@ export const Profile = () => {
                </div>
 
                {isMyProfile ? (
-                  <div className="flex justify-end space-x-3">
-                     <Button variant="outline">
+                  <div className="flex justify-end space-x-3 w-full sm:w-fit">
+                     <Button variant="outline" className="flex-1">
                         <User className="w-4 h-4 mr-2" />
                         Editar perfil
                      </Button>
                      <Button
                         variant="outline"
-                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50 flex-1"
                         onClick={() => {
                            navigate("/");
                            logout();
@@ -97,8 +97,8 @@ export const Profile = () => {
                ) : (
                   <Button
                      variant={"outline"}
-                     className="my-4"
                      onClick={() => window.open(url, "_blank")}
+                     className="my-4 flex-1 sm:flex-0"
                   >
                      Donaciones aqui
                   </Button>
