@@ -25,7 +25,8 @@ export const signature = (_req: Request, res: Response) => {
       success: true,
       signature,
       timestamp,
-      api_key: process.env.CLOUDINARY_API_KEY,
+      apiKey: process.env.CLOUDINARY_API_KEY,
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
    });
 };
 
@@ -130,6 +131,19 @@ export const getAllUser = async (req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
    try {
       const { id } = req.params;
+      const { publicId } = req.body;
+
+      const cloudinaryResult = await cloudinary.uploader.destroy(publicId);
+
+      if (cloudinaryResult.result !== "ok") {
+         res.status(400).json({
+            success: false,
+            message: "Ha ocurrido un error, inténtalo nuevamente",
+         });
+
+         return;
+      }
+
       const deletedPost = await postService.delete(id);
 
       res.status(200).json({

@@ -21,6 +21,7 @@ import { usePostStore } from "@/stores/usePostStore";
 type Post = {
    id: string;
    title: string;
+   publicId: string;
 };
 
 export const Post = () => {

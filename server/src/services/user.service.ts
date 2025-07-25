@@ -67,7 +67,7 @@ export const userService = {
       const salt = await genSalt(10);
       const hashedPassword = await hash(password, salt);
 
-      const [user] = await db
+      const [newUser] = await db
          .insert(users)
          .values({
             name,
@@ -82,7 +82,7 @@ export const userService = {
             email: users.email,
          });
 
-      return user;
+      return { ...newUser, posts: [] };
    },
 
    delete: async (id: string) => {

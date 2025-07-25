@@ -48,7 +48,9 @@ export const useCategoryStore = create<Store>((set, get) => ({
 
          if (res.data.success) {
             toast.success(res.data.message);
-            get().getCategories();
+            const currentCategories = get().categories;
+            const newCategory = res.data.newCategory;
+            set({ categories: [...currentCategories, newCategory] });
          }
       } catch (error) {
          toast.error(error.response.data.message);
@@ -62,7 +64,11 @@ export const useCategoryStore = create<Store>((set, get) => ({
 
          if (res.data.success) {
             toast.success(res.data.message);
-            await get().getCategories();
+            const currenCategories = get().categories;
+            const updatedCategories = currenCategories.filter(
+               (category) => category.id !== id,
+            );
+            set({ categories: updatedCategories });
          }
       } catch (error) {
          toast.error(error.response.data.message);

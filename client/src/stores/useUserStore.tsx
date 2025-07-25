@@ -85,7 +85,9 @@ export const useUserStore = create<Store>((set, get) => ({
 
          if (res.data.success) {
             toast.success(res.data.message);
-            await get().getUsers();
+            const currentUsers = get().users;
+            const newUser = res.data.newUser;
+            set({ users: [...currentUsers, newUser] });
          }
       } catch (error) {
          toast.error(error.response.data.message);
@@ -101,7 +103,9 @@ export const useUserStore = create<Store>((set, get) => ({
 
          if (res.data.success) {
             toast.success(res.data.message);
-            await get().getUsers();
+            const currentUsers = get().users;
+            const updatedUsers = currentUsers.filter((user) => user.id !== id);
+            set({ users: updatedUsers });
          }
       } catch (error) {
          toast.error(error.response.data.message);

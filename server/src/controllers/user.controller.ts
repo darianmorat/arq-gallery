@@ -16,7 +16,7 @@ export const getUsers = async (_req: Request, res: Response) => {
       });
    }
 };
- 
+
 export const getUser = async (req: Request, res: Response) => {
    try {
       const { username } = req.params;
@@ -40,7 +40,6 @@ export const getUser = async (req: Request, res: Response) => {
       });
    }
 };
-
 
 export const createUser = async (req: Request, res: Response) => {
    try {
@@ -69,6 +68,7 @@ export const createUser = async (req: Request, res: Response) => {
       res.status(200).json({
          success: true,
          message: `Usuario "${newUser.name}" creado`,
+         newUser,
       });
    } catch (e) {
       res.status(500).json({

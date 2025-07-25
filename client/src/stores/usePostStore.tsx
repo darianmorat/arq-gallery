@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { toast } from "react-toastify";
 import api from "@/api/axios";
 
-
 type Post = {
    id: string;
    title: string;
@@ -37,7 +36,7 @@ type Store = {
    getPost: (publicId: string) => Promise<void>;
    getUserPosts: (username: string) => Promise<void>;
    uploadPost: (files: File[], formValues: Values) => Promise<boolean | void>;
-   deletePost: (id: string) => Promise<void>;
+   deletePost: (id: string, publicId: string) => Promise<void>;
 };
 
 export const usePostStore = create<Store>((set, get) => ({
@@ -52,7 +51,6 @@ export const usePostStore = create<Store>((set, get) => ({
          const res = await api.get("/post/get-all");
          if (res.data.success) {
             set({ posts: res.data.posts });
-            // console.log(res.data.posts);
          }
       } catch (error) {
          toast.error(error.response.data.message);
@@ -100,18 +98,15 @@ export const usePostStore = create<Store>((set, get) => ({
          }
 
          const res = await api.get("/post/generate-signature");
-         // const uploadResults = [];
-
-         // for (const file of files) { // this is to upload multiple images
          const file = files[0];
 
          const formData = new FormData();
          formData.append("file", file);
-         formData.append("api_key", import.meta.env.VITE_CLOUDINARY_API_KEY);
+         formData.append("api_key", res.data.apiKey);
          formData.append("timestamp", res.data.timestamp);
          formData.append("signature", res.data.signature);
 
-         const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+         const cloudName = res.data.cloudName;
          const cloudRes = await fetch(
             `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`,
             {
@@ -127,8 +122,6 @@ export const usePostStore = create<Store>((set, get) => ({
          const uploadedData = await cloudRes.json();
 
          if (uploadedData.secure_url) {
-            // uploadResults.push(uploadedData);
-
             await api.post("/post/save-metadata", {
                public_id: uploadedData.public_id,
                secure_url: uploadedData.secure_url,
@@ -138,10 +131,8 @@ export const usePostStore = create<Store>((set, get) => ({
                description: formValues.description,
             });
          }
-         // }
 
          toast.success("Imagenes subidas exitosamente");
-         // console.log(uploadResults); // testing
          return true;
       } catch (error) {
          toast.error(error.response?.data?.message || "Fallo en subida");
@@ -150,14 +141,20 @@ export const usePostStore = create<Store>((set, get) => ({
       }
    },
 
-   deletePost: async (id) => {
+   deletePost: async (id, publicId) => {
       set({ isLoading: true });
       try {
-         const res = await api.delete(`/post/delete/${id}`);
+         const res = await api.delete(`/post/delete/${id}`, {
+            data: {
+               publicId: publicId,
+            },
+         });
 
          if (res.data.success) {
             toast.success(res.data.message);
-            await get().getPosts();
+            const currentPosts = get().posts;
+            const updatedPosts = currentPosts.filter((post) => post.id !== id);
+            set({ posts: updatedPosts });
          }
       } catch (error) {
          toast.error(error.response.data.message);

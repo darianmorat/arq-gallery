@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 type Post = {
    id: string;
    title: string;
+   publicId: string;
 };
 
 type DeletePostModalProps = {
@@ -18,8 +19,8 @@ export const DeletePostModal = ({ handleModal, post }: DeletePostModalProps) => 
    const { deletePost } = usePostStore();
    const navigate = useNavigate();
 
-   const handleDelete = (postId: string) => {
-      deletePost(postId);
+   const handleDelete = (postId: string, publicId: string) => {
+      deletePost(postId, publicId);
       navigate("/");
    };
 
@@ -44,7 +45,7 @@ export const DeletePostModal = ({ handleModal, post }: DeletePostModalProps) => 
                   variant={"default"}
                   type="submit"
                   onClick={() => {
-                     handleDelete(post.id);
+                     handleDelete(post.id, post.publicId);
                      handleModal();
                   }}
                   // disabled={isLoading}
