@@ -139,7 +139,7 @@ export const Post = () => {
                            </Button>
                         )}
 
-                        {isAdmin && (
+                        {isAdmin && !isMyPost && (
                            <Button
                               variant={"outline"}
                               onClick={() => {
