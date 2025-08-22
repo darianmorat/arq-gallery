@@ -6,13 +6,13 @@ Official website for **Arq Gallery**
 
 ## Features
 
-- Public Gallery: View apprentice profiles and posts without logging in.
-- Apprentice Access: Apprentices can log in to upload images and publish content.
-- Admin Dashboard: SENA admins manage accounts, create categories and oversee data.
+- Public Gallery: View apprentice profiles and posts without logging in
+- Apprentice Access: Apprentices can log in to upload images and publish content
+- Admin Dashboard: SENA admins manage accounts, create categories and oversee data
 
 ## Documentation
 
-For complete documentation, refer to the [/docs](https://github.com/darianmorat/arq-gallery/tree/main/_docs) section.
+For complete documentation, refer to the [/docs](https://github.com/darianmorat/arq-gallery/tree/main/_docs) section
 
 ## License
 
