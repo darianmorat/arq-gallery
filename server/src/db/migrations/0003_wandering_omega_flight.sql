@@ -1,1 +1,0 @@
-ALTER TABLE "posts" ALTER COLUMN "description" SET DATA TYPE text;

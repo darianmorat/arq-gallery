@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1753061384393,
-      "tag": "0000_workable_the_phantom",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1753069983592,
-      "tag": "0001_peaceful_joshua_kane",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1753284267718,
-      "tag": "0002_gifted_nico_minoru",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1753284503820,
-      "tag": "0003_wandering_omega_flight",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1753285410208,
-      "tag": "0004_aspiring_elektra",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1753296897014,
-      "tag": "0005_opposite_speedball",
+      "when": 1756217378454,
+      "tag": "0000_certain_shaman",
       "breakpoints": true
     }
   ]

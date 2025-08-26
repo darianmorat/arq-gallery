@@ -1,5 +1,5 @@
 {
-  "id": "f3d386b4-c39d-4bc2-b804-22620b6a4e53",
+  "id": "39ad2d1d-98ec-4a40-bff6-042ecfc49853",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -45,6 +45,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'user'"
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -94,6 +100,18 @@
           "primaryKey": false,
           "notNull": true
         },
+        "title": {
+          "name": "title",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "media_url": {
           "name": "media_url",
           "type": "text",
@@ -116,7 +134,7 @@
           "name": "category_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -138,7 +156,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "posts_category_id_categories_id_fk": {
@@ -151,8 +169,8 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "set null",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -182,19 +200,19 @@
         },
         "title": {
           "name": "title",
-          "type": "varchar(50)",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
         "description": {
           "name": "description",
-          "type": "varchar(100)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "tag": {
           "name": "tag",
-          "type": "varchar(30)",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
