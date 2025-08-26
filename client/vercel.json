@@ -2,7 +2,7 @@
    "rewrites": [
       {
          "source": "/api/:path*",
-         "destination": "https://arq-gallery.onrender.com/:path*"
+         "destination": "https://arq-gallery-7j7e.onrender.com/:path*"
       },
       {
          "source": "/(.*)",
